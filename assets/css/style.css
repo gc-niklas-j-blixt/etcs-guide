@@ -1,0 +1,215 @@
+:root {
+  /* Green Cargo inspired palette */
+  --gc-green-dark: #006b3f;
+  --gc-green: #009a44;
+  --gc-green-light: #4dbd74;
+  --gc-background: #f4f7f5;
+  --gc-text: #1f2a24;
+  --gc-gray: #6b6b6b;
+  --radius: 6px;
+}
+
+/* ===== Bas & tillgänglighet ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Respektera OS-inställning för minskad rörelse */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+/* ===== Layout ===== */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px;
+  background: var(--gc-background);
+  color: var(--gc-text);
+  line-height: 1.5;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+h1 {
+  color: var(--gc-green-dark);
+  margin: 0 0 6px;
+}
+
+.logo {
+  width: 220px;
+  margin-bottom: 10px;
+}
+
+main {
+  background: #fff;
+  padding: 24px;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: grid;
+  gap: 16px; /* naturligt avstånd mellan sektioner */
+}
+
+footer {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 20px;
+  text-align: center;
+  color: var(--gc-gray);
+  font-size: 14px;
+}
+
+/* (Frivilligt block om du lägger till meta-/breadcrumbs-rad i HTML) */
+.meta-bar {
+  font-size: 14px;
+  color: var(--gc-gray);
+  margin: -10px 0 10px;
+  min-height: 1.2em; /* förhindra layout-hopp */
+}
+
+/* ===== Buttons ===== */
+button {
+  display: block;
+  width: 100%;
+  padding: 14px 16px;
+  margin: 10px 0;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--gc-green);
+  color: #fff;
+  transition:
+    background 0.15s ease,
+    transform 0.05s ease,
+    box-shadow 0.15s ease;
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.08),
+    0 1px 6px rgba(0, 0, 0, 0.06);
+}
+
+button:hover {
+  background: var(--gc-green-dark);
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.06);
+}
+
+button:focus {
+  outline: 2px solid #004c2f; /* tydlig focus-ring (AA) */
+  outline-offset: 2px;
+}
+
+#back {
+  background: var(--gc-gray);
+}
+
+#back:hover {
+  background: #4a4a4a;
+}
+
+#home {
+  background: var(--gc-green-light);
+  color: #fff;
+}
+
+#home:hover {
+  background: var(--gc-green);
+}
+/* ===== Content ===== */
+#title {
+  margin: 0;
+}
+#image {
+  margin: 8px 0 4px;
+}
+#text {
+  margin: 6px 0 8px;
+}
+
+#choices {
+  display: grid;
+  gap: 8px; /* jämnt avstånd mellan knappar */
+}
+
+img.guide {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 12px 0;
+  border-radius: var(--radius);
+}
+
+/* ===== Breadcrumbs ===== */
+.breadcrumbs {
+  font-size: 14px;
+  color: var(--gc-gray);
+  margin-bottom: 10px;
+  min-height: 1.2em; /* förhindrar layout-hopp */
+  padding-left: 4px;
+}
+
+.breadcrumbs span {
+  opacity: 0.85;
+}
+
+.breadcrumbs .sep {
+  margin: 0 6px;
+  opacity: 0.5;
+}
+
+/* ===== Responsivitet ===== */
+
+/* Små mobiler */
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+  header {
+    margin-bottom: 20px;
+  }
+  .logo {
+    width: 180px;
+  }
+  h1 {
+    font-size: 1.45rem;
+  }
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  button {
+    font-size: 15px;
+    padding: 12px;
+    margin: 8px 0;
+  }
+
+  main {
+    padding: 16px;
+    gap: 12px;
+  }
+}
+
+/* Mellanstor mobil / liten surfplatta */
+@media (min-width: 481px) and (max-width: 768px) {
+  h1 {
+    font-size: 1.6rem;
+  }
+  h2 {
+    font-size: 1.25rem;
+  }
+  button {
+    font-size: 15px;
+  }
+}
