@@ -17,7 +17,7 @@ problem_during_run: {
     text: "Välj det alternativ som bäst beskriver situationen.",
     choices: [
         ["En varning visas på DMI", "run_dmi_warning"],
-        ["Tåget bromsar oväntat", "under_uppbyggnad"],
+        ["Tåget bromsar oväntat", "run_brake_issue"],
         ["Radio / RBC-problem", "under_uppbyggnad"],
         ["ATC / NTC övergångsproblem", "under_uppbyggnad"],
         ["Annat problem", "under_uppbyggnad"]
@@ -27,7 +27,8 @@ problem_during_run: {
   run_brake_issue: {
   title: "När sker den oväntade bromsningen?",
   text: "Välj det alternativ som bäst matchar situationen.",
-  choices: [
+    choices: [
+    ["Direkt när jag börjar köra",]
     ["I samband med balis/passagemarkering", "under_uppbyggnad"],
     ["Plötsligt under färd (utan tydlig händelse)", "under_uppbyggnad"],
     ["När hastighetsgräns sänks eller vid tavla", "under_uppbyggnad"],
@@ -35,6 +36,15 @@ problem_during_run: {
   ]
 },
 
+  
+  run_brake_start: {
+    title: "Bromsning direkt när du börjar köra",
+    text: "ETCS kan begära broms direkt vid start om systemet inte är redo för att ge körbesked.",
+    help: "Vanliga orsaker:\n\n• 'Start of Mission' inte slutförd\n• Tågdata ej bekräftade\n• Bromstest ej avslutat\n• Radio/RBC inte ansluten\n• Systemet saknar korrekt position\n\nDetta steg byggs ut senare.",
+    choices: [
+        ["Tillbaka", "run_brake_issue"]
+    ]
+},
   run_dmi_warning: {
     title: "Vilken typ av varning visas på DMI?",
     text: "Välj det alternativ som bäst beskriver meddelandet eller symbolen du ser.",
