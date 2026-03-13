@@ -28,7 +28,7 @@ problem_during_run: {
     title: "Vilken typ av varning visas på DMI?",
     text: "Välj det alternativ som bäst beskriver meddelandet eller symbolen du ser.",
     choices: [
-        ["Textmeddelande (t.ex. 'Brake Demand')", "under_uppbyggnad"],
+        ["ETCS – Traction cut‑off inte tillgänglig", "warn_traction_cutoff:"],
         ["Symbol eller ikon (t.ex. varningstriangel)", "under_uppbyggnad"],
         ["Jag är osäker", "under_uppbyggnad"],
         ["Tillbaka", "problem_during_run"]
@@ -38,10 +38,19 @@ problem_during_run: {
   warn_traction_cutoff: {
     title: "ETCS – Traction cut‑off inte tillgänglig",
     text: "Föraren informeras om att ETCS inte kan aktivera traction cut‑off. Detta betyder inte nödvändigtvis att ett allvarligt fel föreligger.",
-    help: "Detta meddelande visas ofta i samband med:\n\n• Pågående bromstest\n• Ofullständig tågdata\n• Ej avslutad SoM\n• Systembyte eller knappvalssekvens\n\nI de flesta fall kan körningen fortsätta efter att relevanta processer slutförts.",
+    help: "Detta meddelande visas ofta i samband med:\n\n• Pågående bromstest\n• Ofullständig tågdata\n• Ej avslutad 'Start of Mission'\n• Systembyte eller knappvalssekvens\n\nI de flesta fall kan körningen fortsätta efter att relevanta processer slutförts.",
     choices: [
-        ["Visa möjliga orsaker", "warn_traction_cutoff_causes"],
+        ["Visa möjliga orsaker", "warn_traction_cutoff_info"],
         ["Tillbaka", "run_dmi_text_warning"]
+    ]
+  },
+  
+  warn_traction_cutoff_info: {
+    title: "Information om felet",
+    text: "Detta är inte ett stoppande fel. Du kan normalt fortsätta proceduren som vanligt.",
+    help: "Vanligt beteende:\n\n• Meddelandet visas ofta medan bromstest pågår.\n• Det brukar försvinna när bromstestet avslutas och systemet är klart.\n\nOm meddelandet ligger kvar även efter slutfört bromstest bör felet felanmälas.",
+    choices: [
+        ["Tillbaka", "warn_traction_cutoff"]
     ]
 },
 
