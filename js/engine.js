@@ -1,56 +1,36 @@
-// Historikstack för steg
+// ==========================
+// ETCS GUIDE ENGINE
+// ==========================
+
+// Historikstack för navigation
 let history = [];
 
-function updateBreadcrumbs() {
-  const bcEl = document.getElementById("breadcrumbs");
-  bcEl.innerHTML = "";
-
-  // Visa endast breadcrumbs från historiken
-  const path = history.map(id => guide[id]?.title || id);
-
-  // Bygg HTML
-  path.forEach((title, index) => {
-    const span = document.createElement("span");
-    span.textContent = title;
-    bcEl.appendChild(span);
-
-    if (index < path.length - 1) {
-      const sep = document.createElement("span");
-      sep.textContent = "›";
-      sep.className = "sep";
-      bcEl.appendChild(sep);
-    }
-  });
-}
-
-/**
- * Visar ett steg från guide.js
- */ 
+// ==========================
+// Visa ett steg i guiden
+// ==========================
 function show(step) {
 
-    // Säkerhetskontroll
+    // Säkerhetskontroll – finns steget i guide.js?
     const node = guide[step];
     if (!node) {
-        console.error(`Steg '${step}' saknas i guide.js`);
-        document.getElementById("title").innerText = "Fel i felsökningsguiden";
+        console.error(`Steget '${step}' saknas i guide.js`);
+        document.getElementById("title").innerText = "Fel i guiden";
         document.getElementById("text").innerText =
-            `Steget '${step}' hittades inte. Kontakta support eller kontrollera guide.js.`;
+            `Steget '${step}' hittades inte i datan.`;
         document.getElementById("choices").innerHTML = "";
         return;
     }
 
-    // Lägg till i historiken
+    // Lägg till steget i historiken
     history.push(step);
 
-    
-// uppdatera breadcrumbs
-updateBreadcrumbs();
+    // Uppdatera breadcrumbs
+    updateBreadcrumbs();
 
-
-    // Visa titel
+    // Uppdatera titel
     document.getElementById("title").innerText = node.title || "";
 
-    // Visa bild om den finns
+    // Uppdatera bildfält
     const imageDiv = document.getElementById("image");
     imageDiv.innerHTML = "";
     if (node.image) {
@@ -61,10 +41,10 @@ updateBreadcrumbs();
         imageDiv.appendChild(img);
     }
 
-    // Visa text
+    // Uppdatera brödtext
     document.getElementById("text").innerText = node.text || "";
 
-    // Visa val-knappar
+    // Uppdatera valknappar
     const choicesDiv = document.getElementById("choices");
     choicesDiv.innerHTML = "";
 
@@ -77,7 +57,7 @@ updateBreadcrumbs();
 
             btn.onclick = () => {
                 if (!nextStep) {
-                    console.error(`Valet '${label}' saknar nextStep i guide.js`);
+                    console.error(`Valet '${label}' saknar nextStep.`);
                     return;
                 }
                 show(nextStep);
@@ -88,16 +68,12 @@ updateBreadcrumbs();
     }
 }
 
-/**
- * Backa ett steg
- */
+
+// ==========================
+// Tillbaka-knappen
+// ==========================
 document.getElementById("back").onclick = () => {
 
-    document.getElementById("home").onclick = () => {
-  history = [];           // nollställ historiken
-  show("start");          // hoppa till startsidan
-  updateBreadcrumbs();    // uppdatera stigen direkt
-};
     // Ta bort aktuellt steg
     history.pop();
 
@@ -106,10 +82,59 @@ document.getElementById("back").onclick = () => {
     if (prev) {
         show(prev);
     } else {
-        // Om ingen historik finns → gå till start
+        // Om historiken är tom → börja om
         show("start");
     }
+
+    updateBreadcrumbs();
 };
 
+
+// ==========================
+// Start-knapp
+// ==========================
+document.getElementById("home").onclick = () => {
+    history = [];     // töm historiken
+    show("start");    // börja om
+    updateBreadcrumbs();
+};
+
+
+// ==========================
+// Dynamisk Breadcrumbs (mobil = 2 steg, desktop = 3 steg)
+// ==========================
+function updateBreadcrumbs() {
+    const bcEl = document.getElementById("breadcrumbs");
+    bcEl.innerHTML = "";
+
+    // Automatisk responsiv längd
+    const maxSteps = window.innerWidth < 600 ? 2 : 3;
+
+    const visibleHistory = history.slice(-maxSteps);
+    let path = visibleHistory.map(id => guide[id]?.title || id);
+
+    // Visa "…" om vi döljer tidigare steg
+    if (history.length > visibleHistory.length) {
+        path.unshift("…");
+    }
+
+    // Rendera breadcrumbs
+    path.forEach((title, index) => {
+        const span = document.createElement("span");
+        span.textContent = title;
+        bcEl.appendChild(span);
+
+        if (index < path.length - 1) {
+            const sep = document.createElement("span");
+            sep.textContent = "›";
+            sep.className = "sep";
+            bcEl.appendChild(sep);
+        }
+    });
+}
+
+
+// ==========================
 // Starta guiden
+// ==========================
 show("start");
