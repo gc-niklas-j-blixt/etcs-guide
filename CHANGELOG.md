@@ -2,6 +2,22 @@
 
 Alla noterade förändringar i projektet. Formatet följer SemVer (MAJOR.MINOR.PATCH).
 
+## [1.3.0] – 2026-03-13
+
+### Added
+
+- Dynamisk breadcrumbs (2 steg på mobil, 3 på desktop).
+
+### Changed
+
+- Ny förbättrad engine.js med tydligare struktur.
+- Justerat UI för bättre mobilanpassning.
+
+### Fixed
+
+- Mindre justeringar i HTML för hjälp-knapp och hjälp-ruta.
+- Rättat stavfel "Förareidnetiet" -> "Föraridentitet"
+
 ## [1.2.0] – 2026-03-12
 
 ### Added
