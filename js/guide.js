@@ -7,15 +7,40 @@ const guide = {
     text: "Välj det alternativ som bäst motsvarar situationen.",
     choices: [
       ["Uppstartsproblem", "dmi_boot_check"],
-      ["Problem under körning", "driving_failure"]
+      ["Problem under körning", "problem_during_run"]
     ]
   },
+
+  
+problem_during_run: {
+    title: "Vad är det som händer under körning?",
+    text: "Välj det alternativ som bäst beskriver situationen.",
+    choices: [
+        ["En varning visas på DMI", "under_uppbyggnad"],
+        ["Tåget bromsar oväntat", "under_uppbyggnad"],
+        ["Radio / RBC-problem", "under_uppbyggnad"],
+        ["ATC / NTC övergångsproblem", "under_uppbyggnad"],
+        ["Annat problem", "under_uppbyggnad"]
+    ]
+},
+
 
   driving_failure: {
     title: "Felanmäl enligt gällande rutin",
     text: "Detta steg avslutar guiden. Följ er ordinarie felanmälningsprocess.",
     choices: []
   },
+
+  
+under_uppbyggnad: {
+    title: "Denna del av guiden är under uppbyggnad",
+    text: "Det här steget är inte färdigt ännu. Funktionen kommer att läggas in i kommande version.",
+    help: "Detta är en testversion av verktyget. Fler steg och funktioner läggs in löpande.",
+    choices: [
+        ["Tillbaka", "start"]
+    ]
+},
+
 
   // ======== DMI Uppstart ========
 
