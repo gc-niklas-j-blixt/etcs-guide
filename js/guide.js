@@ -56,8 +56,8 @@ const guide = {
     title: "Ser du något på DMI?",
     text: "Titta efter menyer/symboler som visas på DMI.",
     choices: [
-      ["DMI visar menyn 'Förareidentitet'", "dmi_driver_identity"],
-      ["DMI visar 'ETCS – traction cut off inte tillgänglig' och menyn 'Förareidentitet'", "dmi_driver_identity"],
+      ["DMI visar menyn 'Föraridentitet'", "dmi_driver_identity"],
+      ["DMI visar 'ETCS – traction cut off inte tillgänglig' och menyn 'Föraridentitet'", "dmi_driver_identity"],
       ["Förarhytt inte aktiv", "cab_activation"],
       ["Ingen kontakt med ATP", "driving_failure"],            // tidigare saknade mål
       ["Inget av ovanstående", "driving_failure"]              // tidigare saknade mål
@@ -65,10 +65,10 @@ const guide = {
   },
 
   dmi_driver_identity: {
-    title: "Mata in och bekräfta förareidentitet",
+    title: "Mata in och bekräfta föraridentitet",
     text: "Fyll i uppgifter enligt instruktion på DMI och bekräfta.",
     choices: [
-      ["Förareidentitet inmatad", "dmi_brake_test"]
+      ["Föraridentitet inmatad", "dmi_brake_test"]
     ]
   },
 
