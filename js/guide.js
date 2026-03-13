@@ -16,7 +16,7 @@ problem_during_run: {
     title: "Vad är det som händer under körning?",
     text: "Välj det alternativ som bäst beskriver situationen.",
     choices: [
-        ["En varning visas på DMI", "under_uppbyggnad"],
+        ["En varning visas på DMI", "run_dmi_warning"],
         ["Tåget bromsar oväntat", "under_uppbyggnad"],
         ["Radio / RBC-problem", "under_uppbyggnad"],
         ["ATC / NTC övergångsproblem", "under_uppbyggnad"],
@@ -35,6 +35,15 @@ problem_during_run: {
     ]
 },
 
+  warn_traction_cutoff: {
+    title: "ETCS – Traction cut‑off inte tillgänglig",
+    text: "Föraren informeras om att ETCS inte kan aktivera traction cut‑off. Detta betyder inte nödvändigtvis att ett allvarligt fel föreligger.",
+    help: "Detta meddelande visas ofta i samband med:\n\n• Pågående bromstest\n• Ofullständig tågdata\n• Ej avslutad SoM\n• Systembyte eller knappvalssekvens\n\nI de flesta fall kan körningen fortsätta efter att relevanta processer slutförts.",
+    choices: [
+        ["Visa möjliga orsaker", "warn_traction_cutoff_causes"],
+        ["Tillbaka", "run_dmi_text_warning"]
+    ]
+},
 
   driving_failure: {
     title: "Felanmäl enligt gällande rutin",
