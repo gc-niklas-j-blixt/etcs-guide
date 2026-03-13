@@ -22,6 +22,17 @@ problem_during_run: {
         ["ATC / NTC övergångsproblem", "under_uppbyggnad"],
         ["Annat problem", "under_uppbyggnad"]
     ]
+  },
+
+  run_dmi_warning: {
+    title: "Vilken typ av varning visas på DMI?",
+    text: "Välj det alternativ som bäst beskriver meddelandet eller symbolen du ser.",
+    choices: [
+        ["Textmeddelande (t.ex. 'Brake Demand')", "under_uppbyggnad"],
+        ["Symbol eller ikon (t.ex. varningstriangel)", "under_uppbyggnad"],
+        ["Jag är osäker", "under_uppbyggnad"],
+        ["Tillbaka", "problem_during_run"]
+    ]
 },
 
 
