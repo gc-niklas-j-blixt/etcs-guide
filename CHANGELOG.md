@@ -2,6 +2,13 @@
 
 Alla noterade förändringar i projektet. Formatet följer SemVer (MAJOR.MINOR.PATCH).
 
+## [1.4.1] – 2026-03-13
+
+### Fixed
+
+- Rättat syntaxfel i guide.js (felaktig target-sträng, saknade komman, saknat Tillbaka-val).
+- Förbättrad struktur och konsekvens i noddefinitioner.
+
 ## [1.4.0] – 2026-03-13
 
 ### Added
