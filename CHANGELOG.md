@@ -2,12 +2,18 @@
 
 Alla noterade förändringar i projektet. Formatet följer SemVer (MAJOR.MINOR.PATCH).
 
-## [1.4.1] – 2026-03-13
+## [1.5.0] – 2026-03-13
+
+### Changed
+
+- Global Back-navigation införts som enda återgångsfunktion.
+- Samtliga lokala `Tillbaka`-val borttagna ur guide.js.
+- guide.js strukturerat om för enhetlighet och framtida expansion.
 
 ### Fixed
 
-- Rättat syntaxfel i guide.js (felaktig target-sträng, saknade komman, saknat Tillbaka-val).
-- Förbättrad struktur och konsekvens i noddefinitioner.
+- Rättat syntaxfel och målreferenser i guide.js.
+- Förhindrat duplicerade åter-knappar i gränssnittet.
 
 ## [1.4.0] – 2026-03-13
 
