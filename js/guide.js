@@ -24,13 +24,22 @@ problem_during_run: {
     ]
   },
 
+  run_brake_issue: {
+  title: "När sker den oväntade bromsningen?",
+  text: "Välj det alternativ som bäst matchar situationen.",
+  choices: [
+    ["I samband med balis/passagemarkering", "under_uppbyggnad"],
+    ["Plötsligt under färd (utan tydlig händelse)", "under_uppbyggnad"],
+    ["När hastighetsgräns sänks eller vid tavla", "under_uppbyggnad"],
+    ["Tillbaka", "problem_during_run"]
+  ]
+},
+
   run_dmi_warning: {
     title: "Vilken typ av varning visas på DMI?",
     text: "Välj det alternativ som bäst beskriver meddelandet eller symbolen du ser.",
     choices: [
         ["ETCS – Traction cut‑off inte tillgänglig", "warn_traction_cutoff:"],
-        ["Symbol eller ikon (t.ex. varningstriangel)", "under_uppbyggnad"],
-        ["Jag är osäker", "under_uppbyggnad"],
         ["Tillbaka", "problem_during_run"]
     ]
 },
