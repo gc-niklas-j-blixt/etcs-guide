@@ -2,6 +2,9 @@
 // Uppbyggnad: title (sträng), text (valfri), image (valfri), choices (array av [label, target])
 
 const guide = {
+
+  // ======== START ========
+
   start: {
     title: "Vilken typ av problem har du?",
     text: "Välj det alternativ som bäst motsvarar situationen.",
@@ -11,79 +14,93 @@ const guide = {
     ]
   },
 
-  
-problem_during_run: {
+  problem_during_run: {
     title: "Vad är det som händer under körning?",
     text: "Välj det alternativ som bäst beskriver situationen.",
     choices: [
-        ["En varning visas på DMI", "run_dmi_warning"],
-        ["Tåget bromsar oväntat", "run_brake_issue"],
-        ["Radio / RBC-problem", "under_uppbyggnad"],
-        ["ATC / NTC övergångsproblem", "under_uppbyggnad"],
-        ["Annat problem", "under_uppbyggnad"]
+      ["En varning visas på DMI", "run_dmi_warning"],
+      ["Tåget bromsar oväntat", "run_brake_issue"],
+      ["Radio / RBC-problem", "under_uppbyggnad"],
+      ["ATC / NTC övergångsproblem", "under_uppbyggnad"],
+      ["Annat problem", "under_uppbyggnad"]
     ]
   },
 
-  run_brake_issue: {
-  title: "När sker den oväntade bromsningen?",
-  text: "Välj det alternativ som bäst matchar situationen.",
-    choices: [
-    ["Direkt när jag börjar köra","run_brake_start"],
-    ["I samband med balis/passagemarkering", "under_uppbyggnad"],
-    ["Plötsligt under färd (utan tydlig händelse)", "under_uppbyggnad"],
-    ["När hastighetsgräns sänks eller vid tavla", "under_uppbyggnad"],
-    ["Tillbaka", "problem_during_run"]
-  ]
-},
+  // ======== BROMSNING UNDER KÖRNING ========
 
-  
+  run_brake_issue: {
+    title: "När sker den oväntade bromsningen?",
+    text: "Välj det alternativ som bäst matchar situationen.",
+    choices: [
+      ["Direkt när jag börjar köra", "run_brake_start"],
+      ["I samband med balis/passagemarkering", "under_uppbyggnad"],
+      ["Plötsligt under färd (utan tydlig händelse)", "under_uppbyggnad"],
+      ["När hastighetsgräns sänks eller vid tavla", "under_uppbyggnad"],
+      ["Tillbaka", "problem_during_run"]
+    ]
+  },
+
   run_brake_start: {
     title: "Bromsning direkt när du börjar köra",
     text: "ETCS kan begära broms direkt vid start om systemet inte är redo för att ge körbesked.",
     help: "Vanliga orsaker:\n\n• 'Start of Mission' inte slutförd\n• Tågdata ej bekräftade\n• Bromstest ej avslutat\n• Radio/RBC inte ansluten\n• Systemet saknar korrekt position\n\nDetta steg byggs ut senare.",
     choices: [
-        ["Fortsätt", "run_brake_start_rollningsvakt_q"],
-        ["Tillbaka", "run_brake_issue"]
+      ["Kontrollera om 'Rullningsvakt aktiverad' visas", "run_brake_start_rollningsvakt_q"],
+      ["Tillbaka", "run_brake_issue"]
     ]
   },
-  
+
   run_brake_start_rollningsvakt_q: {
-  title: "Visas meddelandet 'Rullningsvakt aktiverad'?",
-  text: "Titta på DMI efter start och bekräfta om meddelandet visas.",
-  choices: [
-    ["Ja, 'Rullningsvakt aktiverad' visas", "run_brake_start_rollningsvakt_info"],
-    ["Nej, jag ser inte detta meddelande", "under_uppbyggnad"],
-    ["Tillbaka", "run_brake_start"]
-  ]
+    title: "Visas meddelandet 'Rullningsvakt aktiverad'?",
+    text: "Titta på DMI efter start och bekräfta om meddelandet visas.",
+    choices: [
+      ["Ja, 'Rullningsvakt aktiverad' visas", "run_brake_start_rollningsvakt_info"],
+      ["Nej, jag ser inte detta meddelande", "under_uppbyggnad"],
+      ["Tillbaka", "run_brake_start"]
+    ]
   },
-  
+
+  run_brake_start_rollningsvakt_info: {
+    title: "Rullningsvakt aktiverad",
+    text: "Detta kan visas vid start när systemet säkrar att fordonet inte rullar oavsiktligt.",
+    help: "Viktigt:\n\n• Inte ett stoppande fel.\n• Försvinner vanligtvis när bromstest och systemets initiala kontroller är slutförda.\n• Om meddelandet kvarstår efter korrekt bromstest → felanmäl.",
+    choices: [
+      ["Tillbaka", "run_brake_start_rollningsvakt_q"]
+    ]
+  },
+
+  // ======== DMI-VARNINGAR ========
+
   run_dmi_warning: {
     title: "Vilken typ av varning visas på DMI?",
-    text: "Välj det alternativ som bäst beskriver meddelandet eller symbolen du ser.",
+    text: "Välj det alternativ som bäst matchar det du ser på skärmen.",
     choices: [
-        ["ETCS – Traction cut‑off inte tillgänglig", "warn_traction_cutoff:"],
-        ["Tillbaka", "problem_during_run"]
+      ["ETCS – Traction cut‑off inte tillgänglig", "warn_traction_cutoff"],
+      ["Annat textmeddelande", "under_uppbyggnad"],
+      ["Tillbaka", "problem_during_run"]
     ]
-},
+  },
 
   warn_traction_cutoff: {
     title: "ETCS – Traction cut‑off inte tillgänglig",
-    text: "Föraren informeras om att ETCS inte kan aktivera traction cut‑off. Detta betyder inte nödvändigtvis att ett allvarligt fel föreligger.",
-    help: "Detta meddelande visas ofta i samband med:\n\n• Pågående bromstest\n• Ofullständig tågdata\n• Ej avslutad 'Start of Mission'\n• Systembyte eller knappvalssekvens\n\nI de flesta fall kan körningen fortsätta efter att relevanta processer slutförts.",
+    text: "ETCS kan inte aktivera traction cut‑off i detta läge. Detta är vanligtvis inte ett stoppande fel.",
+    help: "Vanliga orsaker:\n\n• Pågående bromstest\n• Tågdata inte fullständigt bekräftade\n• SoM inte avslutad\n• Systembyte eller knappvalssekvens\n\nMeddelandet brukar försvinna när systemet är klart.",
     choices: [
-        ["Visa möjliga orsaker", "warn_traction_cutoff_info"],
-        ["Tillbaka", "run_dmi_text_warning"]
+      ["Mer information", "warn_traction_cutoff_info"],
+      ["Tillbaka", "run_dmi_warning"]
     ]
   },
-  
+
   warn_traction_cutoff_info: {
     title: "Information om felet",
-    text: "Detta är inte ett stoppande fel. Du kan normalt fortsätta proceduren som vanligt.",
-    help: "Vanligt beteende:\n\n• Meddelandet visas ofta medan bromstest pågår.\n• Det brukar försvinna när bromstestet avslutas och systemet är klart.\n\nOm meddelandet ligger kvar även efter slutfört bromstest bör felet felanmälas.",
+    text: "Detta är normalt inte ett stoppande fel. Du kan oftast fortsätta proceduren som vanligt.",
+    help: "Meddelandet försvinner vanligtvis när bromstest är klart och systemet är redo.\n\nOm meddelandet ligger kvar efter korrekt genomfört bromstest bör felet felanmälas.",
     choices: [
-        ["Tillbaka", "warn_traction_cutoff"]
+      ["Tillbaka", "warn_traction_cutoff"]
     ]
-},
+  },
+
+  // ======== GENERELL FELSIDA ========
 
   driving_failure: {
     title: "Felanmäl enligt gällande rutin",
@@ -91,18 +108,16 @@ problem_during_run: {
     choices: []
   },
 
-  
-under_uppbyggnad: {
+  under_uppbyggnad: {
     title: "Denna del av guiden är under uppbyggnad",
     text: "Det här steget är inte färdigt ännu. Funktionen kommer att läggas in i kommande version.",
     help: "Detta är en testversion av verktyget. Fler steg och funktioner läggs in löpande.",
     choices: [
-        ["Tillbaka", "start"]
+      ["Tillbaka", "start"]
     ]
-},
+  },
 
-
-  // ======== DMI Uppstart ========
+  // ======== DMI UPPSTART ========
 
   dmi_boot_check: {
     title: "Startar DMI?",
@@ -144,8 +159,8 @@ under_uppbyggnad: {
       ["DMI visar menyn 'Föraridentitet'", "dmi_driver_identity"],
       ["DMI visar 'ETCS – traction cut off inte tillgänglig' och menyn 'Föraridentitet'", "dmi_driver_identity"],
       ["Förarhytt inte aktiv", "cab_activation"],
-      ["Ingen kontakt med ATP", "driving_failure"],            // tidigare saknade mål
-      ["Inget av ovanstående", "driving_failure"]              // tidigare saknade mål
+      ["Ingen kontakt med ATP", "driving_failure"],
+      ["Inget av ovanstående", "driving_failure"]
     ]
   },
 
@@ -172,7 +187,7 @@ under_uppbyggnad: {
     choices: []
   },
 
-  // ======== Bromstest ========
+  // ======== BROMSTEST ========
 
   dmi_brake_test: {
     title: "Utför bromstest",
@@ -216,7 +231,7 @@ under_uppbyggnad: {
     choices: []
   },
 
-  // ======== Nivåval och tågdata (ETCS/ATC/NTC) ========
+  // ======== NIVÅVAL ========
 
   dmi_level: {
     title: "Välj Utrustningsnivå",
@@ -419,7 +434,8 @@ under_uppbyggnad: {
     ]
   },
 
-  // ----- NTC -----
+  // ======== NTC ========
+
   level_ntc_dmi_main_menu: {
     title: "Huvudmeny visas",
     text: "Tryck på 'Tågdata'.",
@@ -474,11 +490,11 @@ under_uppbyggnad: {
     choices: [["Fortsätt", "start_of_mission_ok"]]
   },
 
-  // ----- Slutsteg -----
+  // ======== SLUTSTEG ========
+
   start_of_mission_ok: {
     title: "Startproceduren är nu klar",
     text: "Systemet är klart för körning.",
     choices: []
   }
 };
-``
