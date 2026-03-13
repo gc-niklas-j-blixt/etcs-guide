@@ -2,6 +2,24 @@
 
 Alla noterade förändringar i projektet. Formatet följer SemVer (MAJOR.MINOR.PATCH).
 
+## [1.4.0] – 2026-03-13
+
+### Added
+
+- Ny gren i felsökningen: _Tåget bromsar oväntat_.
+- Nytt steg: _Direkt när jag börjar köra_.
+- Ny fråga: _Visas meddelandet 'Rullningsvakt aktiverad'?_
+- Ny informationsnod om att felet inte är stoppande och när felanmälan ska göras.
+
+### Changed
+
+- Förbättrad struktur för felsökning under körning.
+- Förtydligad logik och text i bromsnoder.
+
+### Fixed
+
+- Förbättrade formuleringar och klarspråk för användaren.
+
 ## [1.3.0] – 2026-03-13
 
 ### Added

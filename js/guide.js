@@ -42,6 +42,7 @@ problem_during_run: {
     text: "ETCS kan begära broms direkt vid start om systemet inte är redo för att ge körbesked.",
     help: "Vanliga orsaker:\n\n• 'Start of Mission' inte slutförd\n• Tågdata ej bekräftade\n• Bromstest ej avslutat\n• Radio/RBC inte ansluten\n• Systemet saknar korrekt position\n\nDetta steg byggs ut senare.",
     choices: [
+        ["Fortsätt", "run_brake_start_rollningsvakt_q"],
         ["Tillbaka", "run_brake_issue"]
     ]
   },
