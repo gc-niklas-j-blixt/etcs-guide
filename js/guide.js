@@ -28,7 +28,7 @@ problem_during_run: {
   title: "När sker den oväntade bromsningen?",
   text: "Välj det alternativ som bäst matchar situationen.",
     choices: [
-    ["Direkt när jag börjar köra",]
+    ["Direkt när jag börjar köra","run_brake_start"],
     ["I samband med balis/passagemarkering", "under_uppbyggnad"],
     ["Plötsligt under färd (utan tydlig händelse)", "under_uppbyggnad"],
     ["När hastighetsgräns sänks eller vid tavla", "under_uppbyggnad"],
@@ -44,7 +44,18 @@ problem_during_run: {
     choices: [
         ["Tillbaka", "run_brake_issue"]
     ]
-},
+  },
+  
+  run_brake_start_rollningsvakt_q: {
+  title: "Visas meddelandet 'Rullningsvakt aktiverad'?",
+  text: "Titta på DMI efter start och bekräfta om meddelandet visas.",
+  choices: [
+    ["Ja, 'Rullningsvakt aktiverad' visas", "run_brake_start_rollningsvakt_info"],
+    ["Nej, jag ser inte detta meddelande", "under_uppbyggnad"],
+    ["Tillbaka", "run_brake_start"]
+  ]
+  },
+  
   run_dmi_warning: {
     title: "Vilken typ av varning visas på DMI?",
     text: "Välj det alternativ som bäst beskriver meddelandet eller symbolen du ser.",
