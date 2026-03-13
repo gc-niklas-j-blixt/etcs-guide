@@ -35,18 +35,16 @@ const guide = {
       ["Direkt när jag börjar köra", "run_brake_start"],
       ["I samband med balis/passagemarkering", "under_uppbyggnad"],
       ["Plötsligt under färd (utan tydlig händelse)", "under_uppbyggnad"],
-      ["När hastighetsgräns sänks eller vid tavla", "under_uppbyggnad"],
-      ["Tillbaka", "problem_during_run"]
+      ["När hastighetsgräns sänks eller vid tavla", "under_uppbyggnad"]
     ]
   },
 
   run_brake_start: {
     title: "Bromsning direkt när du börjar köra",
     text: "ETCS kan begära broms direkt vid start om systemet inte är redo för att ge körbesked.",
-    help: "Vanliga orsaker:\n\n• 'Start of Mission' inte slutförd\n• Tågdata ej bekräftade\n• Bromstest ej avslutat\n• Radio/RBC inte ansluten\n• Systemet saknar korrekt position\n\nDetta steg byggs ut senare.",
+    help: "Vanliga orsaker:\n\n• 'Start of Mission' inte slutförd\n• Tågdata ej bekräftade\n• Bromstest ej avslutat\n• Radio/RBC inte ansluten\n• Systemet saknar korrekt position",
     choices: [
-      ["Kontrollera om 'Rullningsvakt aktiverad' visas", "run_brake_start_rollningsvakt_q"],
-      ["Tillbaka", "run_brake_issue"]
+      ["Kontrollera om 'Rullningsvakt aktiverad' visas", "run_brake_start_rollningsvakt_q"]
     ]
   },
 
@@ -55,18 +53,15 @@ const guide = {
     text: "Titta på DMI efter start och bekräfta om meddelandet visas.",
     choices: [
       ["Ja, 'Rullningsvakt aktiverad' visas", "run_brake_start_rollningsvakt_info"],
-      ["Nej, jag ser inte detta meddelande", "under_uppbyggnad"],
-      ["Tillbaka", "run_brake_start"]
+      ["Nej, jag ser inte detta meddelande", "under_uppbyggnad"]
     ]
   },
 
   run_brake_start_rollningsvakt_info: {
     title: "Rullningsvakt aktiverad",
     text: "Detta kan visas vid start när systemet säkrar att fordonet inte rullar oavsiktligt.",
-    help: "Viktigt:\n\n• Inte ett stoppande fel.\n• Försvinner vanligtvis när bromstest och systemets initiala kontroller är slutförda.\n• Om meddelandet kvarstår efter korrekt bromstest → felanmäl.",
-    choices: [
-      ["Tillbaka", "run_brake_start_rollningsvakt_q"]
-    ]
+    help: "Viktigt:\n\n• Inte ett stoppande fel.\n• Försvinner vanligtvis när bromstest och systemets initiala kontroller är slutförda.\n• Om meddelandet kvarstår efter korrekt bromstest bör felet felanmälas.",
+    choices: []
   },
 
   // ======== DMI-VARNINGAR ========
@@ -76,8 +71,7 @@ const guide = {
     text: "Välj det alternativ som bäst matchar det du ser på skärmen.",
     choices: [
       ["ETCS – Traction cut‑off inte tillgänglig", "warn_traction_cutoff"],
-      ["Annat textmeddelande", "under_uppbyggnad"],
-      ["Tillbaka", "problem_during_run"]
+      ["Annat textmeddelande", "under_uppbyggnad"]
     ]
   },
 
@@ -86,8 +80,7 @@ const guide = {
     text: "ETCS kan inte aktivera traction cut‑off i detta läge. Detta är vanligtvis inte ett stoppande fel.",
     help: "Vanliga orsaker:\n\n• Pågående bromstest\n• Tågdata inte fullständigt bekräftade\n• SoM inte avslutad\n• Systembyte eller knappvalssekvens\n\nMeddelandet brukar försvinna när systemet är klart.",
     choices: [
-      ["Mer information", "warn_traction_cutoff_info"],
-      ["Tillbaka", "run_dmi_warning"]
+      ["Mer information", "warn_traction_cutoff_info"]
     ]
   },
 
@@ -95,9 +88,7 @@ const guide = {
     title: "Information om felet",
     text: "Detta är normalt inte ett stoppande fel. Du kan oftast fortsätta proceduren som vanligt.",
     help: "Meddelandet försvinner vanligtvis när bromstest är klart och systemet är redo.\n\nOm meddelandet ligger kvar efter korrekt genomfört bromstest bör felet felanmälas.",
-    choices: [
-      ["Tillbaka", "warn_traction_cutoff"]
-    ]
+    choices: []
   },
 
   // ======== GENERELL FELSIDA ========
@@ -112,9 +103,7 @@ const guide = {
     title: "Denna del av guiden är under uppbyggnad",
     text: "Det här steget är inte färdigt ännu. Funktionen kommer att läggas in i kommande version.",
     help: "Detta är en testversion av verktyget. Fler steg och funktioner läggs in löpande.",
-    choices: [
-      ["Tillbaka", "start"]
-    ]
+    choices: []
   },
 
   // ======== DMI UPPSTART ========
@@ -248,42 +237,56 @@ const guide = {
   level_0_dmi_main_menu: {
     title: "Huvudmeny visas",
     text: "Tryck på knappen 'Tågdata'.",
-    choices: [["Fortsätt", "level_0_dmi_confirm_traindata_entry_etcs"]]
+    choices: [
+      ["Fortsätt", "level_0_dmi_confirm_traindata_entry_etcs"]
+    ]
   },
 
   level_0_dmi_confirm_traindata_entry_etcs: {
     title: "Godkänn ETCS-tågdata",
     text: "Säkerställ att grundinställningarna stämmer. Tryck 'JA'.",
-    choices: [["Fortsätt", "level_0_dmi_confirm_traindata_summary_etcs"]]
+    choices: [
+      ["Fortsätt", "level_0_dmi_confirm_traindata_summary_etcs"]
+    ]
   },
 
   level_0_dmi_confirm_traindata_summary_etcs: {
     title: "Bekräfta sammanfattning av ETCS-tågdata",
     text: "Tryck 'JA' för att bekräfta.",
-    choices: [["Fortsätt", "level_0_dmi_select_atc"]]
+    choices: [
+      ["Fortsätt", "level_0_dmi_select_atc"]
+    ]
   },
 
   level_0_dmi_select_atc: {
     title: "Välj ATC SE/NO",
     text: "Välj ATC-variant enligt instruktionsbehov.",
-    choices: [["Fortsätt", "level_0_dmi_traindata_entry_atc"]]
+    choices: [
+      ["Fortsätt", "level_0_dmi_traindata_entry_atc"]
+    ]
   },
 
   level_0_dmi_traindata_entry_atc: {
     title: "Godkänn ATC SE/NO tågdata",
     text: "Tryck på varje fält för att bekräfta värdet, välj sedan 'JA'.",
-    choices: [["Fortsätt", "level_0_dmi_confirm_traindata_entry_atc"]]
+    choices: [
+      ["Fortsätt", "level_0_dmi_confirm_traindata_entry_atc"]
+    ]
   },
 
   level_0_dmi_confirm_traindata_entry_atc: {
     title: "Bekräfta sammanfattningen av ATC SE/NO tågdata",
     text: "Tryck 'JA' för att bekräfta.",
-    choices: [["Fortsätt", "level_0_dmi_train_id"]]
+    choices: [
+      ["Fortsätt", "level_0_dmi_train_id"]
+    ]
   },
 
   level_0_dmi_train_id: {
     title: "Ange och bekräfta Tågnummer",
-    choices: [["Fortsätt", "level_0_dmi_main_menu_start_btn"]]
+    choices: [
+      ["Fortsätt", "level_0_dmi_main_menu_start_btn"]
+    ]
   },
 
   level_0_dmi_main_menu_start_btn: {
@@ -298,41 +301,55 @@ const guide = {
   level_1_dmi_main_menu: {
     title: "Huvudmeny visas",
     text: "Tryck på knappen 'Tågdata'.",
-    choices: [["Fortsätt", "level_1_dmi_confirm_traindata_entry_etcs"]]
+    choices: [
+      ["Fortsätt", "level_1_dmi_confirm_traindata_entry_etcs"]
+    ]
   },
 
   level_1_dmi_confirm_traindata_entry_etcs: {
     title: "Godkänn ETCS-tågdata",
     text: "Säkerställ att grundinställningarna stämmer. Tryck 'JA'.",
-    choices: [["Fortsätt", "level_1_dmi_confirm_traindata_summary_etcs"]]
+    choices: [
+      ["Fortsätt", "level_1_dmi_confirm_traindata_summary_etcs"]
+    ]
   },
 
   level_1_dmi_confirm_traindata_summary_etcs: {
     title: "Bekräfta sammanfattning av ETCS-tågdata",
     text: "Tryck 'JA' för att bekräfta.",
-    choices: [["Fortsätt", "level_1_dmi_select_atc"]]
+    choices: [
+      ["Fortsätt", "level_1_dmi_select_atc"]
+    ]
   },
 
   level_1_dmi_select_atc: {
     title: "Välj ATC SE/NO",
-    choices: [["Fortsätt", "level_1_dmi_traindata_entry_atc"]]
+    choices: [
+      ["Fortsätt", "level_1_dmi_traindata_entry_atc"]
+    ]
   },
 
   level_1_dmi_traindata_entry_atc: {
     title: "Godkänn ATC SE/NO tågdata",
     text: "Tryck på varje fält för att bekräfta värdet, välj sedan 'JA'.",
-    choices: [["Fortsätt", "level_1_dmi_confirm_traindata_entry_atc"]]
+    choices: [
+      ["Fortsätt", "level_1_dmi_confirm_traindata_entry_atc"]
+    ]
   },
 
   level_1_dmi_confirm_traindata_entry_atc: {
     title: "Bekräfta sammanfattningen av ATC SE/NO tågdata",
     text: "Tryck 'JA' för att bekräfta.",
-    choices: [["Fortsätt", "level_1_dmi_train_id"]]
+    choices: [
+      ["Fortsätt", "level_1_dmi_train_id"]
+    ]
   },
 
   level_1_dmi_train_id: {
     title: "Ange och bekräfta Tågnummer",
-    choices: [["Fortsätt", "level_1_dmi_main_menu_start_btn"]]
+    choices: [
+      ["Fortsätt", "level_1_dmi_main_menu_start_btn"]
+    ]
   },
 
   level_1_dmi_main_menu_start_btn: {
@@ -346,20 +363,26 @@ const guide = {
   level_1_start_of_mission: {
     title: "Kvittera symbolen 'Särskilt ansvar'",
     text: "Håll den intryckt i minst 2 sekunder.",
-    choices: [["Fortsätt", "start_of_mission_ok"]]
+    choices: [
+      ["Fortsätt", "start_of_mission_ok"]
+    ]
   },
 
   // ----- Nivå 2 -----
   level_2_dmi_menu_rbc_contact: {
     title: "RBC kontakt",
     text: "Efter att du valt nivå visas 'RBC kontakt'. Tryck 'Ange RBC-data'.",
-    choices: [["Fortsätt", "level_2_dmi_menu_rbc_data"]]
+    choices: [
+      ["Fortsätt", "level_2_dmi_menu_rbc_data"]
+    ]
   },
 
   level_2_dmi_menu_rbc_data: {
     title: "Ange RBC-data",
     text: "Knappa in 'RBC ID' och 'Telefonnummer' till RBC du ska koppla upp mot. Tryck 'JA'.",
-    choices: [["RBC Data inmatat", "level_2_dmi_rbc_connection_check"]]
+    choices: [
+      ["RBC Data inmatat", "level_2_dmi_rbc_connection_check"]
+    ]
   },
 
   level_2_dmi_rbc_connection_check: {
@@ -389,41 +412,55 @@ const guide = {
   level_2_dmi_main_menu: {
     title: "Huvudmeny visas",
     text: "Tryck på 'Tågdata' och följ ordinarie process för Nivå 2.",
-    choices: [["Fortsätt", "level_2_dmi_confirm_traindata_entry_etcs"]]
+    choices: [
+      ["Fortsätt", "level_2_dmi_confirm_traindata_entry_etcs"]
+    ]
   },
 
   level_2_dmi_confirm_traindata_entry_etcs: {
     title: "Godkänn ETCS-tågdata",
     text: "Säkerställ att grundinställningarna stämmer. Tryck 'JA'.",
-    choices: [["Fortsätt", "level_2_dmi_confirm_traindata_summary_etcs"]]
+    choices: [
+      ["Fortsätt", "level_2_dmi_confirm_traindata_summary_etcs"]
+    ]
   },
 
   level_2_dmi_confirm_traindata_summary_etcs: {
     title: "Bekräfta sammanfattning av ETCS-tågdata",
     text: "Tryck 'JA' för att bekräfta.",
-    choices: [["Fortsätt", "level_2_dmi_select_atc"]]
+    choices: [
+      ["Fortsätt", "level_2_dmi_select_atc"]
+    ]
   },
 
   level_2_dmi_select_atc: {
     title: "Välj ATC SE/NO",
-    choices: [["Fortsätt", "level_2_dmi_traindata_entry_atc"]]
+    choices: [
+      ["Fortsätt", "level_2_dmi_traindata_entry_atc"]
+    ]
   },
 
   level_2_dmi_traindata_entry_atc: {
     title: "Godkänn ATC SE/NO tågdata",
     text: "Tryck på varje fält för att bekräfta värdet, välj sedan 'JA'.",
-    choices: [["Fortsätt", "level_2_dmi_confirm_traindata_entry_atc"]]
+    choices: [
+      ["Fortsätt", "level_2_dmi_confirm_traindata_entry_atc"]
+    ]
   },
 
   level_2_dmi_confirm_traindata_entry_atc: {
     title: "Bekräfta sammanfattningen av ATC SE/NO tågdata",
     text: "Tryck 'JA' för att bekräfta.",
-    choices: [["Fortsätt", "level_2_dmi_train_id"]]
+    choices: [
+      ["Fortsätt", "level_2_dmi_train_id"]
+    ]
   },
 
   level_2_dmi_train_id: {
     title: "Ange och bekräfta Tågnummer",
-    choices: [["Fortsätt", "level_2_dmi_main_menu_start_btn"]]
+    choices: [
+      ["Fortsätt", "level_2_dmi_main_menu_start_btn"]
+    ]
   },
 
   level_2_dmi_main_menu_start_btn: {
@@ -439,41 +476,55 @@ const guide = {
   level_ntc_dmi_main_menu: {
     title: "Huvudmeny visas",
     text: "Tryck på 'Tågdata'.",
-    choices: [["Fortsätt", "level_ntc_dmi_confirm_traindata_entry_etcs"]]
+    choices: [
+      ["Fortsätt", "level_ntc_dmi_confirm_traindata_entry_etcs"]
+    ]
   },
 
   level_ntc_dmi_confirm_traindata_entry_etcs: {
     title: "Godkänn ETCS-tågdata",
     text: "Säkerställ att grundinställningarna stämmer. Tryck 'JA'.",
-    choices: [["Fortsätt", "level_ntc_dmi_confirm_traindata_summary_etcs"]]
+    choices: [
+      ["Fortsätt", "level_ntc_dmi_confirm_traindata_summary_etcs"]
+    ]
   },
 
   level_ntc_dmi_confirm_traindata_summary_etcs: {
     title: "Bekräfta sammanfattning av ETCS-tågdata",
     text: "Tryck 'JA' för att bekräfta.",
-    choices: [["Fortsätt", "level_ntc_dmi_select_atc"]]
+    choices: [
+      ["Fortsätt", "level_ntc_dmi_select_atc"]
+    ]
   },
 
   level_ntc_dmi_select_atc: {
     title: "Välj ATC SE/NO",
-    choices: [["Fortsätt", "level_ntc_dmi_traindata_entry_atc"]]
+    choices: [
+      ["Fortsätt", "level_ntc_dmi_traindata_entry_atc"]
+    ]
   },
 
   level_ntc_dmi_traindata_entry_atc: {
     title: "Godkänn ATC SE/NO tågdata",
     text: "Tryck på varje fält för att bekräfta värdet.",
-    choices: [["Fortsätt", "level_ntc_dmi_confirm_traindata_entry_atc"]]
+    choices: [
+      ["Fortsätt", "level_ntc_dmi_confirm_traindata_entry_atc"]
+    ]
   },
 
   level_ntc_dmi_confirm_traindata_entry_atc: {
     title: "Bekräfta sammanfattningen av ATC SE/NO tågdata",
     text: "Tryck 'JA' för att bekräfta.",
-    choices: [["Fortsätt", "level_ntc_dmi_train_id"]]
+    choices: [
+      ["Fortsätt", "level_ntc_dmi_train_id"]
+    ]
   },
 
   level_ntc_dmi_train_id: {
     title: "Ange och bekräfta Tågnummer",
-    choices: [["Fortsätt", "level_ntc_dmi_main_menu_start_btn"]]
+    choices: [
+      ["Fortsätt", "level_ntc_dmi_main_menu_start_btn"]
+    ]
   },
 
   level_ntc_dmi_main_menu_start_btn: {
@@ -487,10 +538,12 @@ const guide = {
   level_ntc_start_of_mission: {
     title: "Start of Mission initieras",
     text: "Följ DMI-instruktioner tills SoM är klar.",
-    choices: [["Fortsätt", "start_of_mission_ok"]]
+    choices: [
+      ["Fortsätt", "start_of_mission_ok"]
+    ]
   },
 
-  // ======== SLUTSTEG ========
+  // ======== SLUT ========
 
   start_of_mission_ok: {
     title: "Startproceduren är nu klar",
