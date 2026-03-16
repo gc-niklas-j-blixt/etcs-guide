@@ -31,32 +31,19 @@ const guide = {
     text: "Välj det alternativ som bäst matchar situationen.",
     choices: [
       ["Direkt när jag börjar köra", "run_brake_start"]
-      // (Tillfälligt borttagna: balis, plötsligt under färd, profil/tavla)
-    ]
+    ],
   },
 
   run_brake_start: {
     title: "Bromsning direkt när du börjar köra",
-    text: "ETCS kan begära broms direkt vid start om systemet inte är redo för att ge körbesked.",
-    help: "Vanliga orsaker:\n\n• 'Start of Mission' inte slutförd\n• Tågdata ej bekräftade\n• Bromstest ej avslutat\n• Radio/RBC inte ansluten\n• Systemet saknar korrekt position",
-    choices: [
-      ["Kontrollera om 'Rullningsvakt aktiverad' visas", "run_brake_start_rollningsvakt_q"]
-    ]
-  },
-
-  run_brake_start_rollningsvakt_q: {
-    title: "Visas meddelandet 'Rullningsvakt aktiverad'?",
-    text: "Titta på DMI efter start och bekräfta om meddelandet visas.",
-    choices: [
-      ["Ja, 'Rullningsvakt aktiverad' visas", "run_brake_start_rollningsvakt_info"]
-      // (Tillfälligt borttagen: 'Nej' → under_uppbyggnad)
-    ]
-  },
-
-  run_brake_start_rollningsvakt_info: {
-    title: "Rullningsvakt aktiverad",
-    text: "Detta kan visas vid start när systemet säkrar att fordonet inte rullar oavsiktligt.",
-    help: "Viktigt:\n\n• Inte ett stoppande fel.\n• Försvinner vanligtvis när bromstest och systemets initiala kontroller är slutförda.\n• Om meddelandet kvarstår efter korrekt bromstest bör felet felanmälas.",
+    text:
+      "ETCS kan begära broms (”Rullningsvakt”) direkt vid start om systemet inte är redo att ge körbesked.\n\n" +
+      "Vanliga orsaker:\n" +
+      "• Start of Mission inte slutförd (t.ex. ‘Start’-knappen ej tryckt i slutet av uppstartsproceduren)\n" +
+      "• Tågdata ej bekräftade\n" +
+      "• Bromstest ej avslutat\n" +
+      "• Radio/RBC inte ansluten\n" +
+      "• Systemet saknar korrekt position",
     choices: []
   },
 
@@ -66,24 +53,110 @@ const guide = {
     title: "Vilken typ av varning visas på DMI?",
     text: "Välj det alternativ som bäst matchar det du ser på skärmen.",
     choices: [
+      ["Kommunikationsfel/Ingen radioförbindelse möjlig", "warn_no_rbc_connection"],
+      ["ETCS-fel", "warn_etcs_fel"],
+      ["Tillsätt broms!", "warn_apply_brake"],
       ["ETCS – Traction cut‑off inte tillgänglig", "warn_traction_cutoff"]
-      // (Tillfälligt borttagen: 'Annat textmeddelande')
     ]
+  },
+
+  // ---- RBC / Radio ----
+
+  warn_no_rbc_connection: {
+    title: "Vilket av följande meddelanden ser du på DMI?",
+    text: "Tryck på den knapp som stämmer med texten på din DMI.",
+    choices: [
+      ["Kommunikationsfel", "rbc_communication_error"],
+      ["Ingen radioförbindelse möjlig", "rbc_no_radio_connection"]
+    ]
+  },
+
+  rbc_communication_error: {
+    title: "Hur reagerar tåget?",
+    text:
+      "Beroende på hur marksystemet är konfigurerat kan tågskyddssystemet göra något av följande:",
+    choices: [
+      ["Beordra broms och visa texten 'Kommunikationsfel'", "rbc_communication_error_brake"],
+      ["Anta driftläge 'Nödstopp – TR' och visa texten 'Kommunikationsfel'", "rbc_communication_error_eb"]
+    ]
+  },
+
+  rbc_communication_error_eb: {
+    title: "Driftläge 'Nödstopp – TR'",
+    image: "assets/images/no_rbc.png",
+    text:
+      "Tågskyddssystemet har gått in i driftläge 'Nödstopp – TR'.\n\n" +
+      "1) Systemet försöker automatiskt återupprätta radioförbindelsen.\n" +
+      "2) Om radioförbindelse inte återupprättas inom 45 sekunder visas symbolen ovan på DMI.\n" +
+      "3) Försöket att återupprätta radioförbindelsen avslutas efter 5 minuter. Om det sker ska du följa operativa regler för förlust av radioförbindelse.\n" +
+      "4) Om återupprättelse lyckas: följ anvisningarna i gällande förarmanual (t.ex. kapitel om återstart/återgång).",
+    choices: []
+  },
+
+  rbc_communication_error_brake: {
+    title: "Kommunikationsfel – broms begärd",
+    image: "assets/images/no_rbc.png",
+    text:
+      "När fordonet har bromsats till stillastående händer följande:\n\n" +
+      "1) Det tekniska körtillståndet har avkortats till fordonets front och bromsarna lossas.\n" +
+      "2) Vänta tills radioförbindelse återupprättas (sker automatiskt, ingen åtgärd krävs).\n" +
+      "3) Om radioförbindelse inte återupprättas inom 35 sekunder efter att den bröts visas symbolen ovan på DMI.\n" +
+      "4) Försöket att återupprätta radioförbindelsen avslutas efter 5 minuter. Om det sker ska du följa operativa regler för förlust av radioförbindelse.",
+    choices: []
+  },
+
+  rbc_no_radio_connection: {
+    title: "Ingen radioförbindelse möjlig",
+    image: "assets/images/no_rbc.png",
+    text:
+      "Systemet meddelar att radioförbindelse inte är möjlig.\n\n" +
+      "• Kontrollera GSM‑R‑status/täckning om möjligt.\n" +
+      "• Avvakta automatisk återupprättelse.\n" +
+      "• Följ operativa regler för förlust av radioförbindelse om status kvarstår.",
+    choices: []
+  },
+
+  // ---- Övriga varningar ----
+
+  warn_apply_brake: {
+    title: "Meddelandet 'Tillsätt broms!' visas på DMI",
+    text:
+      "Meddelandet visas när fordonets retardation är otillräcklig. Du måste själv tillsätta broms tills fordonet står stilla.\n\n" +
+      "När fordonet står stilla måste du kvittera meddelandet 'Tillsätt broms!' samt det efterföljande meddelandet 'Nödbromsfel'.\n\n" +
+      "Utför därefter omstart av systemet. Om meddelandet kvarstår efter omstart ska fordonet felanmälas enligt gällande rutin.",
+    choices: []
+  },
+
+  warn_etcs_fel: {
+    title: "Meddelandet 'ETCS-fel' visas på DMI",
+    text:
+      "Tågskyddssystemet informerar när ett stoppande ETCS‑fel har inträffat.\n\n" +
+      "Om felet kvarstår när fordonet står stilla antar systemet driftläge 'Systemfel (SF)'.\n\n" +
+      "Prova att starta om systemet. Om felet kvarstår ska du följa ordinarie rutin för felrapportering.",
+    choices: []
   },
 
   warn_traction_cutoff: {
     title: "ETCS – Traction cut‑off inte tillgänglig",
-    text: "ETCS kan inte aktivera traction cut‑off i detta läge. Detta är vanligtvis inte ett stoppande fel.",
-    help: "Vanliga orsaker:\n\n• Pågående bromstest\n• Tågdata inte fullständigt bekräftade\n• SoM inte avslutad\n• Systembyte eller knappvalssekvens\n\nMeddelandet brukar försvinna när systemet är klart.",
+    text:
+      "ETCS kan inte aktivera traction cut‑off i detta läge. Detta är vanligtvis inte ett stoppande fel.\n\n" +
+      "Vanliga orsaker:\n" +
+      "• Pågående bromstest\n" +
+      "• Tågdata inte fullständigt bekräftade\n" +
+      "• Start of Mission inte avslutad\n" +
+      "• Systembyte eller knappvalssekvens\n\n" +
+      "Meddelandet försvinner vanligtvis när bromstest är klart och systemet är redo.\n\n" +
+      "Om meddelandet ligger kvar efter korrekt genomfört bromstest bör felet felanmälas.",
     choices: [
       ["Mer information", "warn_traction_cutoff_info"]
     ]
   },
 
   warn_traction_cutoff_info: {
-    title: "Information om felet",
-    text: "Detta är normalt inte ett stoppande fel. Du kan oftast fortsätta proceduren som vanligt.",
-    help: "Meddelandet försvinner vanligtvis när bromstest är klart och systemet är redo.\n\nOm meddelandet ligger kvar efter korrekt genomfört bromstest bör felet felanmälas.",
+    title: "Information – Traction cut‑off",
+    text:
+      "Detta är normalt inte ett stoppande fel. Du kan oftast fortsätta proceduren som vanligt.\n\n" +
+      "Om meddelandet kvarstår efter slutfört bromstest och färdigt SoM bör felet felanmälas enligt rutin.",
     choices: []
   },
 

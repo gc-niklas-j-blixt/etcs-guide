@@ -2,6 +2,29 @@
 
 Alla noterade förändringar i projektet. Formatet följer SemVer (MAJOR.MINOR.PATCH).
 
+## [1.6.0] – 2026-03-13
+
+### Added
+
+- Nya DMI-varningar: 'Kommunikationsfel/Ingen radioförbindelse möjlig', 'Tillsätt broms!', 'ETCS-fel'.
+- Nya RBC-/radio-grenar:
+  - warn_no_rbc_connection
+  - rbc_communication_error
+  - rbc_communication_error_brake
+  - rbc_communication_error_eb
+  - rbc_no_radio_connection
+- Utökad text för 'Bromsning direkt när du börjar köra'.
+
+### Changed
+
+- Förbättrade formuleringar och konsekvent språk i nya varningsnoder.
+- Bildstöd för radio/RBC-varningar (platshållare `assets/images/no_rbc.png`).
+
+### Fixed
+
+- Rättat syntaxfel (komman, felstavade nycklar, saknade targets).
+- Korrigerat bildsökvägar (framåtsnedstreck) och svenska stavfel.
+
 ## [1.5.1] – 2026-03-16
 
 ### Changed
