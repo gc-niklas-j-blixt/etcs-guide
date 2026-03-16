@@ -2,7 +2,7 @@
 
 Alla noterade förändringar i projektet. Formatet följer SemVer (MAJOR.MINOR.PATCH).
 
-## [1.6.0] – 2026-03-13
+## [1.6.0] – 2026-03-16
 
 ### Added
 
