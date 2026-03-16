@@ -2,6 +2,12 @@
 
 Alla noterade förändringar i projektet. Formatet följer SemVer (MAJOR.MINOR.PATCH).
 
+## [1.5.1] – 2026-03-16
+
+### Changed
+
+- Temporärt dolt ej implementerade val i körningsflödet (DMI-varningar och bromsgren) för enklare test och renare UI.
+
 ## [1.5.0] – 2026-03-13
 
 ### Changed

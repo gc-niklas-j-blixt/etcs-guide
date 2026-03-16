@@ -19,10 +19,8 @@ const guide = {
     text: "Välj det alternativ som bäst beskriver situationen.",
     choices: [
       ["En varning visas på DMI", "run_dmi_warning"],
-      ["Tåget bromsar oväntat", "run_brake_issue"],
-      ["Radio / RBC-problem", "under_uppbyggnad"],
-      ["ATC / NTC övergångsproblem", "under_uppbyggnad"],
-      ["Annat problem", "under_uppbyggnad"]
+      ["Tåget bromsar oväntat", "run_brake_issue"]
+      // (Tillfälligt borttagna: Radio/RBC, ATC/NTC, Annat problem)
     ]
   },
 
@@ -32,10 +30,8 @@ const guide = {
     title: "När sker den oväntade bromsningen?",
     text: "Välj det alternativ som bäst matchar situationen.",
     choices: [
-      ["Direkt när jag börjar köra", "run_brake_start"],
-      ["I samband med balis/passagemarkering", "under_uppbyggnad"],
-      ["Plötsligt under färd (utan tydlig händelse)", "under_uppbyggnad"],
-      ["När hastighetsgräns sänks eller vid tavla", "under_uppbyggnad"]
+      ["Direkt när jag börjar köra", "run_brake_start"]
+      // (Tillfälligt borttagna: balis, plötsligt under färd, profil/tavla)
     ]
   },
 
@@ -52,8 +48,8 @@ const guide = {
     title: "Visas meddelandet 'Rullningsvakt aktiverad'?",
     text: "Titta på DMI efter start och bekräfta om meddelandet visas.",
     choices: [
-      ["Ja, 'Rullningsvakt aktiverad' visas", "run_brake_start_rollningsvakt_info"],
-      ["Nej, jag ser inte detta meddelande", "under_uppbyggnad"]
+      ["Ja, 'Rullningsvakt aktiverad' visas", "run_brake_start_rollningsvakt_info"]
+      // (Tillfälligt borttagen: 'Nej' → under_uppbyggnad)
     ]
   },
 
@@ -70,8 +66,8 @@ const guide = {
     title: "Vilken typ av varning visas på DMI?",
     text: "Välj det alternativ som bäst matchar det du ser på skärmen.",
     choices: [
-      ["ETCS – Traction cut‑off inte tillgänglig", "warn_traction_cutoff"],
-      ["Annat textmeddelande", "under_uppbyggnad"]
+      ["ETCS – Traction cut‑off inte tillgänglig", "warn_traction_cutoff"]
+      // (Tillfälligt borttagen: 'Annat textmeddelande')
     ]
   },
 
@@ -99,6 +95,7 @@ const guide = {
     choices: []
   },
 
+  // Behåller noden om du vill länka till den senare
   under_uppbyggnad: {
     title: "Denna del av guiden är under uppbyggnad",
     text: "Det här steget är inte färdigt ännu. Funktionen kommer att läggas in i kommande version.",
