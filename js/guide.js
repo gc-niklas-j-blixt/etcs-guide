@@ -35,7 +35,7 @@ const guide = {
   },
 
   run_brake_start: {
-    title: "Bromsning direkt när du börjar köra",
+    title: "Bromsning direkt när du börjar köra (”Rullningsvakt”)",
     text:
       "ETCS kan begära broms (”Rullningsvakt”) direkt vid start om systemet inte är redo att ge körbesked.\n\n" +
       "Vanliga orsaker:\n" +
@@ -136,6 +136,23 @@ const guide = {
     choices: []
   },
 
+  warn_atp_no_connction: {
+    title: "Ingen kontakt med ATP",
+    text: "Om detta felmeddelande viasas ska du säkerställa att tågskyddsystemet är påslaget korrekt. Du kan prova att starta om systmet genom att:\n\n1)Vrida huvudströmställaren till läge 'OFF'\n\n2)Vänta minst 10 sekunder.\n\n3)Slå på tågskyddsystemet genom att vrida huvudströmställaren till läge 'ON'.\n\n4)Observera att uppstarten av systemet tar 120 sekunder. Om systemet startar upp korrekt så ska DMI visa något utav följande:",
+    choices: [
+      ["Menyn 'Föraridentitet", "dmi_driver_id"],
+      ['Förarhytt inte aktiv',"cab_activation"],
+    ],
+  },
+
+  dmi_driver_id: {
+    title: "Mata in och bekräfta föraridentitet",
+    text: "Fyll i uppgifter enligt instruktion på DMI och bekräfta.",
+    choices: [
+      ["Föraridentitet inmatat","dmi_brake_test"],
+    ],
+  },
+
   warn_traction_cutoff: {
     title: "ETCS – Traction cut‑off inte tillgänglig",
     text:
@@ -216,20 +233,14 @@ const guide = {
     text: "Titta efter menyer/symboler som visas på DMI.",
     choices: [
       ["DMI visar menyn 'Föraridentitet'", "dmi_driver_identity"],
-      ["DMI visar 'ETCS – traction cut off inte tillgänglig' och menyn 'Föraridentitet'", "dmi_driver_identity"],
+      ["ETCS – Traction cut‑off inte tillgänglig", "warn_traction_cutoff"],
       ["Förarhytt inte aktiv", "cab_activation"],
       ["Ingen kontakt med ATP", "driving_failure"],
-      ["Inget av ovanstående", "driving_failure"]
+      
     ]
   },
 
-  dmi_driver_identity: {
-    title: "Mata in och bekräfta föraridentitet",
-    text: "Fyll i uppgifter enligt instruktion på DMI och bekräfta.",
-    choices: [
-      ["Föraridentitet inmatad", "dmi_brake_test"]
-    ]
-  },
+
 
   cab_activation: {
     title: "Aktivera förarhytten",
