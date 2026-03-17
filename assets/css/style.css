@@ -1,11 +1,11 @@
 :root {
   /* Green Cargo inspired palette */
-  --gc-green-dark: #006b3f;
-  --gc-green: #009a44;
-  --gc-green-light: #4dbd74;
-  --gc-background: #f4f7f5;
-  --gc-text: #1f2a24;
-  --gc-gray: #6b6b6b;
+  --gc-green-dark: #275937;
+  --gc-green: #3f9c35;
+  --gc-green-light: #dfe9df;
+  --gc-background: #ffffff;
+  --gc-text: #1e1e1e;
+  --gc-gray: #8b8d8e;
   --radius: 6px;
 }
 
@@ -42,6 +42,7 @@ header {
 }
 
 h1 {
+  text-align: center;
   color: var(--gc-green-dark);
   margin: 0 0 6px;
 }
@@ -52,7 +53,7 @@ h1 {
 }
 
 main {
-  background: #fff;
+  background: #ffffff;
   padding: 24px;
   border-radius: var(--radius);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -87,7 +88,7 @@ button {
   border: none;
   border-radius: var(--radius);
   background: var(--gc-green);
-  color: #fff;
+  color: #ffffff;
   transition:
     background 0.15s ease,
     transform 0.05s ease,
@@ -107,7 +108,7 @@ button:active {
 }
 
 button:focus {
-  outline: 2px solid #004c2f; /* tydlig focus-ring (AA) */
+  outline: 2px solid #275937; /* tydlig focus-ring (AA) */
   outline-offset: 2px;
 }
 
@@ -116,7 +117,7 @@ button:focus {
 }
 
 #back:hover {
-  background: #4a4a4a;
+  background: #8b8d8e;
 }
 
 #home {
@@ -132,6 +133,7 @@ button:focus {
   margin: 0;
 }
 #image {
+  text-align: center;
   margin: 8px 0 4px;
 }
 #text {
@@ -144,7 +146,8 @@ button:focus {
 }
 
 img.guide {
-  display: block;
+  display: inline-block;
+  margin: 0 auto;
   max-width: 100%;
   height: auto;
   margin: 12px 0;

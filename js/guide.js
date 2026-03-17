@@ -136,7 +136,7 @@ const guide = {
     choices: []
   },
 
-  warn_atp_no_connction: {
+  warn_atp_no_connection: {
     title: "Ingen kontakt med ATP",
     text: "Om detta felmeddelande viasas ska du säkerställa att tågskyddsystemet är påslaget korrekt. Du kan prova att starta om systmet genom att:\n\n1)Vrida huvudströmställaren till läge 'OFF'\n\n2)Vänta minst 10 sekunder.\n\n3)Slå på tågskyddsystemet genom att vrida huvudströmställaren till läge 'ON'.\n\n4)Observera att uppstarten av systemet tar 120 sekunder. Om systemet startar upp korrekt så ska DMI visa något utav följande:",
     choices: [
@@ -147,7 +147,8 @@ const guide = {
 
   dmi_driver_id: {
     title: "Mata in och bekräfta föraridentitet",
-    text: "Fyll i uppgifter enligt instruktion på DMI och bekräfta.",
+    image: "assets/images/Föraridentitet.png",
+    text: "Bilden på din DMI ska se ut ungefär som bilden ovan.Fyll i uppgifter enligt instruktion på DMI och bekräfta.",
     choices: [
       ["Föraridentitet inmatat","dmi_brake_test"],
     ],
@@ -209,7 +210,7 @@ const guide = {
     text: "Kontrollera att dvärgbrytarna är i korrekt läge enligt fordonets instruktion.",
     choices: [
       ["Ja, men DMI är fortfarande svart", "dmi_boot_failure"],
-      ["Nej, jag har inte kontrollerat dvärgbrytarna", "dmi_cb_reset"]
+      ["Nej, jag har inte kontrollerat dvärgbrytarna", "dmi_cb_reset"],
     ]
   },
 
@@ -218,7 +219,7 @@ const guide = {
     text: "Sätt dvärgbrytarna i rätt läge och prova igen.",
     choices: [
       ["Dvärgbrytarna var i rätt läge, men DMI är fortfarande svart", "dmi_boot_failure"],
-      ["Dvärgbrytarna var i fel läge, nu är de återställda", "dmi_display_check"]
+      ["Dvärgbrytarna var i fel läge, nu är de återställda", "dmi_display_check"],
     ]
   },
 
@@ -232,7 +233,7 @@ const guide = {
     title: "Ser du något på DMI?",
     text: "Titta efter menyer/symboler som visas på DMI.",
     choices: [
-      ["DMI visar menyn 'Föraridentitet'", "dmi_driver_identity"],
+      ["DMI visar menyn 'Föraridentitet'", "dmi_driver_id"],
       ["ETCS – Traction cut‑off inte tillgänglig", "warn_traction_cutoff"],
       ["Förarhytt inte aktiv", "cab_activation"],
       ["Ingen kontakt med ATP", "driving_failure"],
@@ -247,7 +248,7 @@ const guide = {
     text: "Aktivera hytten enligt rutin och invänta DMI-reaktion.",
     choices: [
       ["Hytten är aktiverad men DMI reagerar inte", "cab_activation_failure"],
-      ["Nu har jag aktiverat hytten", "dmi_driver_identity"]
+      ["Nu har jag aktiverat hytten", "dmi_driver_id"]
     ]
   },
 
@@ -261,6 +262,7 @@ const guide = {
 
   dmi_brake_test: {
     title: "Utför bromstest",
+    image:"assets/images/Utför Bromstest.png",
     text: "Tryck på 'JA' eller inom den gula rutan om alternativen 'JA/NEJ' inte visas.",
     choices: [
       ["ETCS-bromstest lyckades", "dmi_level"],
@@ -305,6 +307,7 @@ const guide = {
 
   dmi_level: {
     title: "Välj Utrustningsnivå",
+    image: "assets/images/Meny Nivå.png",
     text: "Välj och kvittera vilken nivå du vill köra.",
     choices: [
       ["Nivå 0", "level_0_dmi_main_menu"],
@@ -316,7 +319,8 @@ const guide = {
 
   // ----- Nivå 0 -----
   level_0_dmi_main_menu: {
-    title: "Huvudmeny visas",
+    title: "Huvudmeny visas (Nivå 0)",
+    image: "assets/images/Huvudmeny Tågdata.png",
     text: "Tryck på knappen 'Tågdata'.",
     choices: [
       ["Fortsätt", "level_0_dmi_confirm_traindata_entry_etcs"]
@@ -324,15 +328,16 @@ const guide = {
   },
 
   level_0_dmi_confirm_traindata_entry_etcs: {
-    title: "Godkänn ETCS-tågdata",
+    title: "Godkänn ETCS-tågdata(Nivå 0)",
     text: "Säkerställ att grundinställningarna stämmer. Tryck 'JA'.",
     choices: [
-      ["Fortsätt", "level_0_dmi_confirm_traindata_summary_etcs"]
+      ["Fortsätt", "level_0_dmi_confirm_traindata_summary_etcs"],
     ]
   },
 
   level_0_dmi_confirm_traindata_summary_etcs: {
-    title: "Bekräfta sammanfattning av ETCS-tågdata",
+    title: "Bekräfta sammanfattning av ETCS-tågdata (Nivå 0)",
+    image: "assets/images/Bekräfta tågdata ETCS.png",
     text: "Tryck 'JA' för att bekräfta.",
     choices: [
       ["Fortsätt", "level_0_dmi_select_atc"]
@@ -340,15 +345,16 @@ const guide = {
   },
 
   level_0_dmi_select_atc: {
-    title: "Välj ATC SE/NO",
-    text: "Välj ATC-variant enligt instruktionsbehov.",
+    title: "Välj ATC SE/NO(Nivå 0)",
+    text: "Tryck på knappen ATC SE/NO.",
     choices: [
       ["Fortsätt", "level_0_dmi_traindata_entry_atc"]
     ]
   },
 
   level_0_dmi_traindata_entry_atc: {
-    title: "Godkänn ATC SE/NO tågdata",
+    title: "Ange ATC SE/NO tågdata (Nivå 0)",
+    image: "assets/images/ATC tågdata.png",
     text: "Tryck på varje fält för att bekräfta värdet, välj sedan 'JA'.",
     choices: [
       ["Fortsätt", "level_0_dmi_confirm_traindata_entry_atc"]
@@ -356,7 +362,8 @@ const guide = {
   },
 
   level_0_dmi_confirm_traindata_entry_atc: {
-    title: "Bekräfta sammanfattningen av ATC SE/NO tågdata",
+    title: "Bekräfta sammanfattningen av ATC SE/NO tågdata(Nivå 0)",
+    image: "assets/images/Sammanfattning ATC tågdata.png",
     text: "Tryck 'JA' för att bekräfta.",
     choices: [
       ["Fortsätt", "level_0_dmi_train_id"]
@@ -364,23 +371,35 @@ const guide = {
   },
 
   level_0_dmi_train_id: {
-    title: "Ange och bekräfta Tågnummer",
+    title: "Ange och bekräfta Tågnummer(Nivå 0)",
+    image: "assets/images/Tågnummer.png",
     choices: [
-      ["Fortsätt", "level_0_dmi_main_menu_start_btn"]
+      ["Fortsätt", "level_0_dmi_main_menu_start_btn"],
     ]
   },
 
   level_0_dmi_main_menu_start_btn: {
-    title: "Tryck på knappen 'Start'",
+    title: "Tryck på knappen 'Start'(Nivå 0)",
+    text: "Tryck på knappen start.",
     choices: [
-      ["Fortsätt", "start_of_mission_ok"],
-      ["Det går inte att trycka på 'Start'", "level_0_dmi_main_menu"]
+      ["Fortsätt", "level_0_confirm_sr_mode"],
+      ["Det går inte att trycka på 'Start'", "level_0_dmi_main_menu"],
     ]
   },
+  level_0_confirm_sr_mode: {
+    title: "Kvittera symbolen 'Särskilt ansvar'(Nivå 0)",
+    image: "assets/images/Kvittering särskilt ansvar.png",
+    text: "Håll den intryckt i minst 2 sekunder.",
+    choices: [
+      ["Fortsätt", "level_0_start_of_mission_ok"],
+    ]
+  },
+  
 
   // ----- Nivå 1 -----
   level_1_dmi_main_menu: {
-    title: "Huvudmeny visas",
+    title: "Huvudmeny visas(Nivå 1)",
+    image: "assets/images/Huvudmeny Tågdata.png",
     text: "Tryck på knappen 'Tågdata'.",
     choices: [
       ["Fortsätt", "level_1_dmi_confirm_traindata_entry_etcs"]
@@ -388,7 +407,7 @@ const guide = {
   },
 
   level_1_dmi_confirm_traindata_entry_etcs: {
-    title: "Godkänn ETCS-tågdata",
+    title: "Godkänn ETCS-tågdata(Nivå 1)",
     text: "Säkerställ att grundinställningarna stämmer. Tryck 'JA'.",
     choices: [
       ["Fortsätt", "level_1_dmi_confirm_traindata_summary_etcs"]
@@ -396,22 +415,25 @@ const guide = {
   },
 
   level_1_dmi_confirm_traindata_summary_etcs: {
-    title: "Bekräfta sammanfattning av ETCS-tågdata",
+    title: "Bekräfta sammanfattning av ETCS-tågdata(Nivå 1)",
+    image: "assets/images/Bekräfta tågdata ETCS.png",
     text: "Tryck 'JA' för att bekräfta.",
     choices: [
-      ["Fortsätt", "level_1_dmi_select_atc"]
+      ["Fortsätt", "level_1_dmi_select_atc"],
     ]
   },
 
   level_1_dmi_select_atc: {
-    title: "Välj ATC SE/NO",
+    title: "Välj ATC SE/NO(Nivå 1)",
+    text: "Tryck på knappen ATC SE/NO.",
     choices: [
       ["Fortsätt", "level_1_dmi_traindata_entry_atc"]
     ]
   },
 
   level_1_dmi_traindata_entry_atc: {
-    title: "Godkänn ATC SE/NO tågdata",
+    title: "Ange ATC SE/NO tågdata(Nivå 1)",
+    image: "assets/images/ATC tågdata.png",
     text: "Tryck på varje fält för att bekräfta värdet, välj sedan 'JA'.",
     choices: [
       ["Fortsätt", "level_1_dmi_confirm_traindata_entry_atc"]
@@ -419,7 +441,8 @@ const guide = {
   },
 
   level_1_dmi_confirm_traindata_entry_atc: {
-    title: "Bekräfta sammanfattningen av ATC SE/NO tågdata",
+    title: "Bekräfta sammanfattningen av ATC SE/NO tågdata(Nivå 1)",
+    image: "assets/images/Sammanfattning ATC tågdata.png",
     text: "Tryck 'JA' för att bekräfta.",
     choices: [
       ["Fortsätt", "level_1_dmi_train_id"]
@@ -427,14 +450,16 @@ const guide = {
   },
 
   level_1_dmi_train_id: {
-    title: "Ange och bekräfta Tågnummer",
+    title: "Ange och bekräfta Tågnummer(Nivå 1)",
+    image: "assets/images/Tågnummer.png",
     choices: [
       ["Fortsätt", "level_1_dmi_main_menu_start_btn"]
     ]
   },
 
   level_1_dmi_main_menu_start_btn: {
-    title: "Tryck på knappen 'Start'",
+    title: "Tryck på knappen 'Start'(Nivå 1)",
+    text: "Tryck på knappen 'Start'",
     choices: [
       ["Fortsätt", "level_1_start_of_mission"],
       ["Det går inte att trycka på 'Start'", "level_1_dmi_main_menu"]
@@ -442,17 +467,19 @@ const guide = {
   },
 
   level_1_start_of_mission: {
-    title: "Kvittera symbolen 'Särskilt ansvar'",
+    title: "Kvittera symbolen 'Särskilt ansvar'(Nivå 1)",
+    image: "assets/images/Kvittering särskilt ansvar.png",
     text: "Håll den intryckt i minst 2 sekunder.",
     choices: [
-      ["Fortsätt", "start_of_mission_ok"]
+      ["Fortsätt", "level_1_start_of_mission_ok"]
     ]
   },
 
   // ----- Nivå 2 -----
   level_2_dmi_menu_rbc_contact: {
     title: "RBC kontakt",
-    text: "Efter att du valt nivå visas 'RBC kontakt'. Tryck 'Ange RBC-data'.",
+    image: "assets/images/Meny RBC Kontakt.png",
+    text: "Efter att du valt nivå visas menyn 'RBC kontakt'. Tryck på 'Ange RBC-data'.",
     choices: [
       ["Fortsätt", "level_2_dmi_menu_rbc_data"]
     ]
@@ -460,6 +487,7 @@ const guide = {
 
   level_2_dmi_menu_rbc_data: {
     title: "Ange RBC-data",
+    image: "assets/images/RBC-data.png",
     text: "Knappa in 'RBC ID' och 'Telefonnummer' till RBC du ska koppla upp mot. Tryck 'JA'.",
     choices: [
       ["RBC Data inmatat", "level_2_dmi_rbc_connection_check"]
@@ -468,7 +496,8 @@ const guide = {
 
   level_2_dmi_rbc_connection_check: {
     title: "Kontroll av RBC-förbindelse",
-    text: "DMI visar huvudmeny och symbol för 'RBC-förbindelse upprättad' om anslutningen lyckas.",
+    image: "assets/images/RBC kontakt OK.png",
+    text: "DMI visar huvudmeny och symbol för 'RBC-förbindelse upprättad' om anslutningen lyckas(se bild ovan).",
     choices: [
       ["RBC-förbindelse upprättad", "level_2_dmi_main_menu"],
       ["Misslyckades", "gsmr_cb_check"]
@@ -491,15 +520,16 @@ const guide = {
   },
 
   level_2_dmi_main_menu: {
-    title: "Huvudmeny visas",
-    text: "Tryck på 'Tågdata' och följ ordinarie process för Nivå 2.",
+    title: "Huvudmeny visas(Nivå 2)",
+    image: "assets/images/Huvudmeny Tågdata.png",
+    text: "Tryck på knappen 'Tågdata'.",
     choices: [
       ["Fortsätt", "level_2_dmi_confirm_traindata_entry_etcs"]
     ]
   },
 
   level_2_dmi_confirm_traindata_entry_etcs: {
-    title: "Godkänn ETCS-tågdata",
+    title: "Godkänn ETCS-tågdata(Nivå 2)",
     text: "Säkerställ att grundinställningarna stämmer. Tryck 'JA'.",
     choices: [
       ["Fortsätt", "level_2_dmi_confirm_traindata_summary_etcs"]
@@ -507,7 +537,8 @@ const guide = {
   },
 
   level_2_dmi_confirm_traindata_summary_etcs: {
-    title: "Bekräfta sammanfattning av ETCS-tågdata",
+    title: "Bekräfta sammanfattning av ETCS-tågdata(Nivå 2)",
+    image: "assets/images/Bekräfta tågdata ETCS.png",
     text: "Tryck 'JA' för att bekräfta.",
     choices: [
       ["Fortsätt", "level_2_dmi_select_atc"]
@@ -515,14 +546,16 @@ const guide = {
   },
 
   level_2_dmi_select_atc: {
-    title: "Välj ATC SE/NO",
+    title: "Välj ATC SE/NO(Nivå 2)",
+    text: "Tryck på knappen ATC SE/NO.",
     choices: [
       ["Fortsätt", "level_2_dmi_traindata_entry_atc"]
     ]
   },
 
   level_2_dmi_traindata_entry_atc: {
-    title: "Godkänn ATC SE/NO tågdata",
+    title: "Ange ATC SE/NO tågdata(Nivå 2)",
+    image: "assets/images/ATC tågdata.png",
     text: "Tryck på varje fält för att bekräfta värdet, välj sedan 'JA'.",
     choices: [
       ["Fortsätt", "level_2_dmi_confirm_traindata_entry_atc"]
@@ -530,7 +563,8 @@ const guide = {
   },
 
   level_2_dmi_confirm_traindata_entry_atc: {
-    title: "Bekräfta sammanfattningen av ATC SE/NO tågdata",
+    title: "Bekräfta sammanfattningen av ATC SE/NO tågdata(Nivå 2)",
+    image: "assets/images/Sammanfattning ATC tågdata.png",
     text: "Tryck 'JA' för att bekräfta.",
     choices: [
       ["Fortsätt", "level_2_dmi_train_id"]
@@ -538,17 +572,28 @@ const guide = {
   },
 
   level_2_dmi_train_id: {
-    title: "Ange och bekräfta Tågnummer",
+    title: "Ange och bekräfta Tågnummer(Nivå 2)",
+    image: "assets/images/Tågnummer.png",
     choices: [
       ["Fortsätt", "level_2_dmi_main_menu_start_btn"]
     ]
   },
 
   level_2_dmi_main_menu_start_btn: {
-    title: "Tryck på knappen 'Start'",
+    title: "Tryck på knappen 'Start'(Nivå 2)",
+    text: "Tryck på knappen 'Start'.",
     choices: [
-      ["Fortsätt", "start_of_mission_ok"],
+      ["Fortsätt", "level_2_confirm_sr_mode"],
       ["Det går inte att trycka på 'Start'", "level_2_dmi_main_menu"]
+    ]
+  },
+
+    level_2_confirm_sr_mode: {
+    title: "Kvittera symbolen 'Särskilt ansvar'(Nivå 2)",
+    image: "assets/images/Kvittering särskilt ansvar.png",
+    text: "Håll den intryckt i minst 2 sekunder.",
+    choices: [
+      ["Fortsätt", "level_2_start_of_mission_ok"],
     ]
   },
 
@@ -580,13 +625,15 @@ const guide = {
 
   level_ntc_dmi_select_atc: {
     title: "Välj ATC SE/NO",
+    text: "Tryck på knappen ATC SE/NO.",
     choices: [
       ["Fortsätt", "level_ntc_dmi_traindata_entry_atc"]
     ]
   },
 
   level_ntc_dmi_traindata_entry_atc: {
-    title: "Godkänn ATC SE/NO tågdata",
+    title: "Ange ATC SE/NO tågdata",
+    image: "assets/images/ATC tågdata.png",
     text: "Tryck på varje fält för att bekräfta värdet.",
     choices: [
       ["Fortsätt", "level_ntc_dmi_confirm_traindata_entry_atc"]
@@ -595,6 +642,7 @@ const guide = {
 
   level_ntc_dmi_confirm_traindata_entry_atc: {
     title: "Bekräfta sammanfattningen av ATC SE/NO tågdata",
+    image: "assets/images/Sammanfattning ATC tågdata.png",
     text: "Tryck 'JA' för att bekräfta.",
     choices: [
       ["Fortsätt", "level_ntc_dmi_train_id"]
@@ -603,13 +651,14 @@ const guide = {
 
   level_ntc_dmi_train_id: {
     title: "Ange och bekräfta Tågnummer",
+    image: "assets/images/Tågnummer.png",
     choices: [
       ["Fortsätt", "level_ntc_dmi_main_menu_start_btn"]
     ]
   },
 
   level_ntc_dmi_main_menu_start_btn: {
-    title: "Tryck på knappen 'Start'",
+    title: "Tryck på knappen 'Start'(Nivå NTC)",
     choices: [
       ["Fortsätt", "level_ntc_start_of_mission"],
       ["Det går inte att trycka på 'Start'", "level_ntc_dmi_main_menu"]
@@ -620,15 +669,39 @@ const guide = {
     title: "Start of Mission initieras",
     text: "Följ DMI-instruktioner tills SoM är klar.",
     choices: [
-      ["Fortsätt", "start_of_mission_ok"]
+      ["Fortsätt", "level_ntc_start_of_mission_ok"],
     ]
   },
 
   // ======== SLUT ========
 
-  start_of_mission_ok: {
-    title: "Startproceduren är nu klar",
-    text: "Systemet är klart för körning.",
+  level_0_start_of_mission_ok: {
+    title: "Startproceduren för Nivå 0 är nu klar",
+    image: "assets/images/Nivå 0.png",
+    text: "Systemet är klart för körning om du ser symbolen på bilden ovan efter att du tryckt 'Start'",
     choices: []
-  }
+  },
+
+   level_1_start_of_mission_ok: {
+      title: "Startproceduren för Nivå 1 är nu klar",
+      image: "assets/images/Nivå 1.png",
+      text: "Systemet är klart för körning om du ser symbolen på bilden ovan efter att du tryckt 'Start'",
+      choices: []
+  },
+   
+    level_2_start_of_mission_ok: {
+      title: "Startproceduren för Nivå 2 är nu klar",
+      image: "assets/images/Nivå 2.png",
+      text: "Systemet är klart för körning om du ser symbolen på bilden ovan efter att du tryckt 'Start'",
+      choices: []
+  },
+    
+    level_ntc_start_of_mission_ok: {
+    title: "Startproceduren för ATC är nu klar",
+    image: "assets/images/Nivå NTC.png",
+    text: "Systemet är klart för körning om du ser symbolen på bilden ovan efter att du tryckt 'Start'",
+    choices: []
+  },
+
 };
+

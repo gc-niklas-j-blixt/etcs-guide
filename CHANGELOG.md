@@ -2,6 +2,32 @@
 
 Alla noterade förändringar i projektet. Formatet följer SemVer (MAJOR.MINOR.PATCH).
 
+## [1.7.0] – 2026-03-17
+
+### Added
+
+- Nya DMI-varningar och körningsflöden:
+  - Kommunikationsfel/Ingen radioförbindelse möjlig → fördjupning med noderna:
+    - warn_no_rbc_connection
+    - rbc_communication_error
+    - rbc_communication_error_brake
+    - rbc_communication_error_eb
+    - rbc_no_radio_connection
+  - ETCS-fel (stoppscenario)
+  - Tillsätt broms! (retardationskrav)
+- Fördjupade nivåflöden (Nivå 0/1/2) med bilder på menyer och kvitteringar.
+- Förtydligad logik för bromsning direkt vid start (”Rullningsvakt”).
+
+### Changed
+
+- Uppdaterade texter och rubriker för tydlighet i DMI-varningsgrenen och nivåstegen.
+- Bildstöd tillagt i flera steg för bättre igenkänning (ex. Huvudmeny, Tågdata, RBC-kontakt).
+
+### Fixed
+
+- Mindre stavnings- och formuleringrättningar i nya steg.
+- (Att göra i samma commit) Återställ generisk `start_of_mission_ok`-nod eller ändra NTC-target för att undvika trasig länk.
+
 ## [1.6.0] – 2026-03-16
 
 ### Added
