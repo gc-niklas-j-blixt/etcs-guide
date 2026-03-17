@@ -2,6 +2,18 @@
 
 Alla noterade förändringar i projektet. Formatet följer SemVer (MAJOR.MINOR.PATCH).
 
+## [1.7.1] – 2026-03-17
+
+### Changed
+
+- Uppdaterade färger i `style.css` enligt Green Cargos grafiska profil (primär/sekundär, knappar, länkar, highlights).
+- Finjusterad visning av bilder (centrering/spacing) för konsekvent layout.
+
+### Fixed
+
+- Rättade länk och stavning i DMI/ATP-flödet (bl.a. `warn_atp_no_connection`).
+- Återställt/kompletterat målnod för SoM-OK för att undvika trasiga länkar i NTC-flödet.
+
 ## [1.7.0] – 2026-03-17
 
 ### Added
