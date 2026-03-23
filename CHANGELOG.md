@@ -2,6 +2,35 @@
 
 Alla noterade förändringar i projektet. Formatet följer SemVer (MAJOR.MINOR.PATCH).
 
+## [1.8.0] – 2026-03-12
+
+### Added
+
+- Ny bromsgren under körning: `run_brake_run` med åtgärdssteg `eb_from_rbc` (Nödstopp från RBC), inkl. bild.
+- DMI-startflöde utökat:
+  - `dmi_display_check` kompletterat med fler alternativ (ETCS driftbroms ej tillgänglig, JRU inte tillgängligt, ingen kontakt med ATP m.m.).
+  - Nya steg för ATP påslag och omstart: `atp_switch_on`, `atp_restart`, `atp_boot_failure`.
+- Varningssteg:
+  - `dmi_sb_not_avail` (ETCS driftbroms inte tillgänglig) – informativt, ej stoppande om bromstest godkänns.
+  - `jru_not_recording` (JRU registrerar inte) – rekommendation att felanmälas om det kvarstår.
+- Bildstöd breddat i flera steg (RBC/Radio, Rullningsvakt, TCO, nivåmenyer, kvitteringar m.fl.).
+
+### Changed
+
+- **CSS/Brand:** Uppdaterad stil enligt Green Cargo-profil:
+  - Brandtokens i `:root` (`--gc-green`, `--gc-green-dark`, `--gc-green-light`, `--gc-text`, `--gc-gray`, `--gc-background`, `--radius`).
+  - Knappar med hover/active/focus (tydlig focus-ring, skugga, animationer avstängs vid `prefers-reduced-motion`).
+  - Rubriker (H1/H2) och stegtitel `#title` centrerade, GC-färg på rubrik.
+  - Bildcentrering via `#image { text-align:center }` + `img.guide { display:inline-block; max-width:100%; }`.
+  - Layout med maxbredd 720px, kortskugga, spacing med `gap`.
+  - Responsiv typografi och spacing för mobil/platta.
+- Förtydligade texter och förbättrade nivåflöden (0/1/2/NTC) och DMI-startmeny.
+- RBC-kontaktflöde: förbättrad väg vid misslyckad uppkoppling (`gsmr_cb_check` → `gsmr_failure`).
+
+### Fixed
+
+- Mindre språk-/stavningsrättningar och avlänkningskontroller i nya noder.
+
 ## [1.7.1] – 2026-03-17
 
 ### Changed

@@ -2,7 +2,7 @@
   /* Green Cargo inspired palette */
   --gc-green-dark: #275937;
   --gc-green: #3f9c35;
-  --gc-green-light: #dfe9df;
+  --gc-green-light: #ced64b;
   --gc-background: #ffffff;
   --gc-text: #1e1e1e;
   --gc-gray: #8b8d8e;
@@ -45,6 +45,10 @@ h1 {
   text-align: center;
   color: var(--gc-green-dark);
   margin: 0 0 6px;
+}
+
+h2 {
+  text-align: center;
 }
 
 .logo {
@@ -130,13 +134,17 @@ button:focus {
 }
 /* ===== Content ===== */
 #title {
-  margin: 0;
+  text-align: center;
+  font-weight: 600;
+  color: var(--gc-green);
+  margin-bottom: 12px;
 }
 #image {
   text-align: center;
   margin: 8px 0 4px;
 }
 #text {
+  text-align: center;
   margin: 6px 0 8px;
 }
 

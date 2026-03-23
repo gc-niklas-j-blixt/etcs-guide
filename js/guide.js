@@ -30,12 +30,28 @@ const guide = {
     title: "När sker den oväntade bromsningen?",
     text: "Välj det alternativ som bäst matchar situationen.",
     choices: [
-      ["Direkt när jag börjar köra", "run_brake_start"]
+      ["Direkt när jag börjar köra", "run_brake_start"],
+      ["När jag kör som vanligt","run_brake_run"],
     ],
+  },
+
+  run_brake_run: {
+    title: "Ser du något av följande meddelanden på DMI?",
+    choices: [
+      ["Nödstopp från RBC", "eb_from_rbc"],
+    ],
+  },
+
+  eb_from_rbc:{
+    title: "Nödstopp från RBC (Broms begärd)",
+    image: "assets/images/eb_from_RBC.png",
+    text: "Tågskyddsystemet har mottagit en ovilkorlig Nödbromsorder från RBC.\n1) Låt fordonet stanna.\n2) Följ operativa regler för nödstoppsmeddelanden från RBC",
+    choices:[],
   },
 
   run_brake_start: {
     title: "Bromsning direkt när du börjar köra (”Rullningsvakt”)",
+    image: "assets/images/roll_away_protection.png",
     text:
       "ETCS kan begära broms (”Rullningsvakt”) direkt vid start om systemet inte är redo att ge körbesked.\n\n" +
       "Vanliga orsaker:\n" +
@@ -154,8 +170,15 @@ const guide = {
     ],
   },
 
-  warn_traction_cutoff: {
-    title: "ETCS – Traction cut‑off inte tillgänglig",
+ 
+
+
+
+  // ======== GENERELL FELSIDA ========
+
+   warn_traction_cutoff: {
+     title: "ETCS – Traction cut‑off inte tillgänglig",
+     image: "assets/images/TCO_not_avail.png",
     text:
       "ETCS kan inte aktivera traction cut‑off i detta läge. Detta är vanligtvis inte ett stoppande fel.\n\n" +
       "Vanliga orsaker:\n" +
@@ -166,26 +189,40 @@ const guide = {
       "Meddelandet försvinner vanligtvis när bromstest är klart och systemet är redo.\n\n" +
       "Om meddelandet ligger kvar efter korrekt genomfört bromstest bör felet felanmälas.",
     choices: [
-      ["Mer information", "warn_traction_cutoff_info"]
+      
     ]
   },
-
-  warn_traction_cutoff_info: {
-    title: "Information – Traction cut‑off",
-    text:
-      "Detta är normalt inte ett stoppande fel. Du kan oftast fortsätta proceduren som vanligt.\n\n" +
-      "Om meddelandet kvarstår efter slutfört bromstest och färdigt SoM bör felet felanmälas enligt rutin.",
-    choices: []
-  },
-
-  // ======== GENERELL FELSIDA ========
-
+   
   driving_failure: {
     title: "Felanmäl enligt gällande rutin",
     text: "Detta steg avslutar guiden. Följ er ordinarie felanmälningsprocess.",
     choices: []
   },
 
+  atp_switch_on: {
+    title: "Kontrollera ETCS-huvudströmställare",
+    text: "Kontrollera så att 'ETCS-huvudströmställeren är i läge TILL/ON.",
+    choices: [
+      ["ETCS-huvudströmställare är i läge TILL/ON", "atp_restart"],
+      ["Nu har jag satt ETCS-strömställaren i läge TILL/ON","dmi_boot_check"],
+    ]
+  },
+
+  atp_restart: {
+    title: "Har du provat start om systemet?",
+      text:"Prova att starta om systemet genom att göra följande\n\n1).Vrid huvudströmställaren till läge FRÅN/OFF.\n\n2).Vänta minst 10 sekunder innan du slår på systemet igen.\n\n3).Vrid huvudströmställaren till läge TILL/ON\n\n4).Gå tillbaka till hytten och kontrollera DMI.(Det tar 120 sekunder för systemet att start upp).",
+    choices: [
+      ["Jag har redan provat starta utan framgång","atp_boot_failure"],
+      ["Nu har jag provat starta om", "dmi_boot_check"],
+    ]
+  },
+
+  atp_boot_failure: {
+    title: "Felanmäl",
+    text: "Felanmäl att systemet inte startar enligt gällande rutin",
+    choices:[],
+  },
+    
   // Behåller noden om du vill länka till den senare
   under_uppbyggnad: {
     title: "Denna del av guiden är under uppbyggnad",
@@ -207,7 +244,7 @@ const guide = {
 
   dmi_cb_check: {
     title: "Har du kontrollerat dvärgbrytarna för DMI?",
-    text: "Kontrollera att dvärgbrytarna är i korrekt läge enligt fordonets instruktion.",
+    text: "Kontrollera att dvärgbrytarna för båda lokets DMI:er är i läge 'TILL'.",
     choices: [
       ["Ja, men DMI är fortfarande svart", "dmi_boot_failure"],
       ["Nej, jag har inte kontrollerat dvärgbrytarna", "dmi_cb_reset"],
@@ -219,7 +256,7 @@ const guide = {
     text: "Sätt dvärgbrytarna i rätt läge och prova igen.",
     choices: [
       ["Dvärgbrytarna var i rätt läge, men DMI är fortfarande svart", "dmi_boot_failure"],
-      ["Dvärgbrytarna var i fel läge, nu är de återställda", "dmi_display_check"],
+      ["Dvärgbrytarna var i fel läge, nu är de återställda", "dmi_boot_check"],
     ]
   },
 
@@ -233,12 +270,28 @@ const guide = {
     title: "Ser du något på DMI?",
     text: "Titta efter menyer/symboler som visas på DMI.",
     choices: [
-      ["DMI visar menyn 'Föraridentitet'", "dmi_driver_id"],
-      ["ETCS – Traction cut‑off inte tillgänglig", "warn_traction_cutoff"],
       ["Förarhytt inte aktiv", "cab_activation"],
-      ["Ingen kontakt med ATP", "driving_failure"],
+      ["DMI visar menyn 'Föraridentitet'", "dmi_driver_id"],
+      ["ETCS driftbroms inte tillgänglig", "dmi_sb_not_avail"],
+      ["ETCS – Traction cut‑off inte tillgänglig", "warn_traction_cutoff"],
+      ["Juridical Recording inte tillgängligt", "jru_not_recording"],
+      ["Ingen kontakt med ATP", "atp_switch_on"],
       
     ]
+  },
+
+  dmi_sb_not_avail: {
+    title: "ETCS driftbroms inte tillänglig",
+    image: "assets/images/dmi_sb_not_avail.png",
+    text: "Detta meddelande indikerar på att tågskyddsystemet inte kan aktivera driftbroms. Meddelandet ska försvinna efter att du har genomfört ett bromstest. Detta är inte stoppande men du ska rapprotera in felet enligt gällande rutin om meddelandet inte försvinner efter att du genomfört ett godkänt bromstest",
+    choices:[],
+  },
+
+  jru_not_recording: {
+    title: "Juridical Recording Unit(JRU) registrerar inte",
+    image: "assets/images/jru_not_recording.png",
+    text: "Detta indikerar på att JRU-enheten inte kan spela in för tillfället. Normalt ska detta meddelande försvinna av sig själv efter några sekunder. Om det inte gör det ska detta felanmälas enligt gällande rutin.",
+    choices:[]
   },
 
 
@@ -248,7 +301,7 @@ const guide = {
     text: "Aktivera hytten enligt rutin och invänta DMI-reaktion.",
     choices: [
       ["Hytten är aktiverad men DMI reagerar inte", "cab_activation_failure"],
-      ["Nu har jag aktiverat hytten", "dmi_driver_id"]
+      ["Nu har jag aktiverat hytten", "dmi_display_check"]
     ]
   },
 
@@ -266,18 +319,12 @@ const guide = {
     text: "Tryck på 'JA' eller inom den gula rutan om alternativen 'JA/NEJ' inte visas.",
     choices: [
       ["ETCS-bromstest lyckades", "dmi_level"],
-      ["ETCS-bromstest lyckades, men 'ETCS – traction cut off inte tillgänglig' visas", "traction_cut_off_failure"],
+      ["ETCS-bromstest lyckades, men 'ETCS – traction cut off inte tillgänglig' visas", "warn_traction_cutoff"],
       ["Går inte att starta bromstest", "check_brake_handle"]
     ]
   },
 
-  traction_cut_off_failure: {
-    title: "Traction cut off – inte tillgänglig",
-    text: "Felet är inte stoppande men behöver utredas. Felanmäl enligt gällande rutin och gå vidare.",
-    choices: [
-      ["Fortsätt", "dmi_level"]
-    ]
-  },
+ 
 
   check_brake_handle: {
     title: "Kontrollera huvudbromskontroll och HL",
@@ -488,7 +535,7 @@ const guide = {
   level_2_dmi_menu_rbc_data: {
     title: "Ange RBC-data",
     image: "assets/images/RBC-data.png",
-    text: "Knappa in 'RBC ID' och 'Telefonnummer' till RBC du ska koppla upp mot. Tryck 'JA'.",
+    text: "Knappa in 'RBC ID' och 'Telefonnummer' till RBC du ska koppla upp mot. Tryck sedan 'JA'.",
     choices: [
       ["RBC Data inmatat", "level_2_dmi_rbc_connection_check"]
     ]
@@ -509,6 +556,7 @@ const guide = {
     text: "Ska stå i läge 'TILL'.",
     choices: [
       ["Dvärgbrytarna är i rätt läge", "level_2_dmi_menu_rbc_data"],
+      ["Dvägrbrytarna är i rätt läge men uppkoppling funkar inte","gsmr_failure"],
       ["Dvärgbrytarna är i fel läge och går inte att återställa", "gsmr_failure"]
     ]
   },
@@ -600,7 +648,8 @@ const guide = {
   // ======== NTC ========
 
   level_ntc_dmi_main_menu: {
-    title: "Huvudmeny visas",
+    title: "Huvudmeny visas(ATC-2)",
+    image: "assets/images/Huvudmeny Tågdata.png",
     text: "Tryck på 'Tågdata'.",
     choices: [
       ["Fortsätt", "level_ntc_dmi_confirm_traindata_entry_etcs"]
@@ -608,7 +657,7 @@ const guide = {
   },
 
   level_ntc_dmi_confirm_traindata_entry_etcs: {
-    title: "Godkänn ETCS-tågdata",
+    title: "Godkänn ETCS-tågdata(ATC-2)",
     text: "Säkerställ att grundinställningarna stämmer. Tryck 'JA'.",
     choices: [
       ["Fortsätt", "level_ntc_dmi_confirm_traindata_summary_etcs"]
@@ -616,7 +665,8 @@ const guide = {
   },
 
   level_ntc_dmi_confirm_traindata_summary_etcs: {
-    title: "Bekräfta sammanfattning av ETCS-tågdata",
+    title: "Bekräfta sammanfattning av ETCS-tågdata(ATC-2)",
+    image: "assets/images/Bekräfta tågdata ETCS.png",
     text: "Tryck 'JA' för att bekräfta.",
     choices: [
       ["Fortsätt", "level_ntc_dmi_select_atc"]
@@ -624,7 +674,7 @@ const guide = {
   },
 
   level_ntc_dmi_select_atc: {
-    title: "Välj ATC SE/NO",
+    title: "Välj ATC SE/NO(ATC-2)",
     text: "Tryck på knappen ATC SE/NO.",
     choices: [
       ["Fortsätt", "level_ntc_dmi_traindata_entry_atc"]
@@ -632,7 +682,7 @@ const guide = {
   },
 
   level_ntc_dmi_traindata_entry_atc: {
-    title: "Ange ATC SE/NO tågdata",
+    title: "Ange ATC SE/NO tågdata(ATC-2)",
     image: "assets/images/ATC tågdata.png",
     text: "Tryck på varje fält för att bekräfta värdet.",
     choices: [
@@ -641,7 +691,7 @@ const guide = {
   },
 
   level_ntc_dmi_confirm_traindata_entry_atc: {
-    title: "Bekräfta sammanfattningen av ATC SE/NO tågdata",
+    title: "Bekräfta sammanfattningen av ATC SE/NO tågdata(ATC-2)",
     image: "assets/images/Sammanfattning ATC tågdata.png",
     text: "Tryck 'JA' för att bekräfta.",
     choices: [
@@ -650,7 +700,7 @@ const guide = {
   },
 
   level_ntc_dmi_train_id: {
-    title: "Ange och bekräfta Tågnummer",
+    title: "Ange och bekräfta Tågnummer(ATC-2)",
     image: "assets/images/Tågnummer.png",
     choices: [
       ["Fortsätt", "level_ntc_dmi_main_menu_start_btn"]
@@ -658,7 +708,8 @@ const guide = {
   },
 
   level_ntc_dmi_main_menu_start_btn: {
-    title: "Tryck på knappen 'Start'(Nivå NTC)",
+    title: "Tryck på knappen 'Start'(ATC-2)",
+    text: "Tryck på knappen 'Start'",
     choices: [
       ["Fortsätt", "level_ntc_start_of_mission"],
       ["Det går inte att trycka på 'Start'", "level_ntc_dmi_main_menu"]
@@ -666,8 +717,9 @@ const guide = {
   },
 
   level_ntc_start_of_mission: {
-    title: "Start of Mission initieras",
-    text: "Följ DMI-instruktioner tills SoM är klar.",
+    title: "Kvittera driftläge STM (ATC-2)",
+    image: "assets/images/Kvittering_Level_NTC.png",
+    text: "Tryck och håll in symolen för dritfläge STM(ATC-2)",
     choices: [
       ["Fortsätt", "level_ntc_start_of_mission_ok"],
     ]
@@ -697,8 +749,8 @@ const guide = {
   },
     
     level_ntc_start_of_mission_ok: {
-    title: "Startproceduren för ATC är nu klar",
-    image: "assets/images/Nivå NTC.png",
+    title: "Startproceduren för ATC-2 är nu klar",
+    image: "assets/images/Nivå_NTC.png",
     text: "Systemet är klart för körning om du ser symbolen på bilden ovan efter att du tryckt 'Start'",
     choices: []
   },
