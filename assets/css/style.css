@@ -116,6 +116,20 @@ button:focus {
   outline-offset: 2px;
 }
 
+button:focus-visible {
+  outline: 3px solid var(--gc-green-dark);
+  outline-offset: 2px;
+}
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  filter: grayscale(0.2);
+}
+
 #back {
   background: var(--gc-gray);
 }
@@ -125,7 +139,7 @@ button:focus {
 }
 
 #home {
-  background: var(--gc-green-light);
+  background: var(--gc-green);
   color: #fff;
 }
 
@@ -144,7 +158,7 @@ button:focus {
   margin: 8px 0 4px;
 }
 #text {
-  text-align: center;
+  text-align: left;
   margin: 6px 0 8px;
 }
 
@@ -222,5 +236,20 @@ img.guide {
   }
   button {
     font-size: 15px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --gc-background: #111418;
+    --gc-text: #f1f3f5;
+    --gc-gray: #a0a4a8;
+  }
+  main {
+    background: #1a1f25;
+    box-shadow: none;
+  }
+  footer {
+    color: var(--gc-gray);
   }
 }

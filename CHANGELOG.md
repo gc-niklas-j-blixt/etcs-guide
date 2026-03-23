@@ -2,7 +2,23 @@
 
 Alla noterade förändringar i projektet. Formatet följer SemVer (MAJOR.MINOR.PATCH).
 
-## [1.8.0] – 2026-03-12
+## [1.8.1] – 2026-03-23
+
+### Fixed
+
+- Rättade stavfel och formuleringsmissar i flera noder (t.ex. “tillänglig” → “tillgänglig”, “viasas” → “visas”, “Dvägrbrytarna” → “Dvärgbrytarna”, m.fl.).
+- Justerat textinnehåll i ATP-/DMI-flöden för konsekvens och tydlighet.
+- Förbättrade knapptexter och instruktioner för jämnt språkbruk.
+- Mindre förbättringar av layout och fokusmarkeringar enligt GC-stilen.
+
+### Changed
+
+- CSS uppdaterad med förslag från föregående recension:
+  - Fokus-styling förbättrad för tangentbordsnavigering.
+  - Finjusterad knappfärg/hover och spacing.
+  - Mindre typografiska justeringar i rubrik och brödtext
+
+## [1.8.0] – 2026-03-23
 
 ### Added
 

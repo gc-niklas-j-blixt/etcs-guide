@@ -154,7 +154,7 @@ const guide = {
 
   warn_atp_no_connection: {
     title: "Ingen kontakt med ATP",
-    text: "Om detta felmeddelande viasas ska du säkerställa att tågskyddsystemet är påslaget korrekt. Du kan prova att starta om systmet genom att:\n\n1)Vrida huvudströmställaren till läge 'OFF'\n\n2)Vänta minst 10 sekunder.\n\n3)Slå på tågskyddsystemet genom att vrida huvudströmställaren till läge 'ON'.\n\n4)Observera att uppstarten av systemet tar 120 sekunder. Om systemet startar upp korrekt så ska DMI visa något utav följande:",
+    text: "Om detta felmeddelande visas ska du säkerställa att tågskyddsystemet är påslaget korrekt. Du kan prova att starta om systmet genom att:\n\n1)Vrida huvudströmställaren till läge 'OFF'\n\n2)Vänta minst 10 sekunder.\n\n3)Slå på tågskyddsystemet genom att vrida huvudströmställaren till läge 'ON'.\n\n4)Observera att uppstarten av systemet tar 120 sekunder. Om systemet startar upp korrekt så ska DMI visa något utav följande:",
     choices: [
       ["Menyn 'Föraridentitet", "dmi_driver_id"],
       ['Förarhytt inte aktiv',"cab_activation"],
@@ -281,7 +281,7 @@ const guide = {
   },
 
   dmi_sb_not_avail: {
-    title: "ETCS driftbroms inte tillänglig",
+    title: "ETCS driftbroms inte tillgänglig",
     image: "assets/images/dmi_sb_not_avail.png",
     text: "Detta meddelande indikerar på att tågskyddsystemet inte kan aktivera driftbroms. Meddelandet ska försvinna efter att du har genomfört ett bromstest. Detta är inte stoppande men du ska rapprotera in felet enligt gällande rutin om meddelandet inte försvinner efter att du genomfört ett godkänt bromstest",
     choices:[],
@@ -556,7 +556,7 @@ const guide = {
     text: "Ska stå i läge 'TILL'.",
     choices: [
       ["Dvärgbrytarna är i rätt läge", "level_2_dmi_menu_rbc_data"],
-      ["Dvägrbrytarna är i rätt läge men uppkoppling funkar inte","gsmr_failure"],
+      ["Dvärgbrytarna är i rätt läge men uppkoppling funkar inte","gsmr_failure"],
       ["Dvärgbrytarna är i fel läge och går inte att återställa", "gsmr_failure"]
     ]
   },
