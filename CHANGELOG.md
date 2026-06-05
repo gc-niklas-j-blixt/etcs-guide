@@ -2,6 +2,25 @@
 
 Alla noterade förändringar i projektet. Formatet följer SemVer (MAJOR.MINOR.PATCH).
 
+## [1.10.0] – 2026-06-05
+
+### Added
+
+- Ny snabbmeny för vanliga fel direkt från startsidan.
+- Sökfunktion för att snabbt hitta relevanta felsökningssteg i guiden.
+- Knapp för att kopiera färdig felrapport från slutsteg.
+- Felrapporten innehåller vald felsökningsväg, slutsteg, rekommenderad information/åtgärd samt fält att komplettera inför felanmälan.
+- Felrapporten kompletteras automatiskt med rapportdatum, guideversion och sidans URL.
+
+### Changed
+
+- Förbättrad navigationshistorik för att undvika dubbletter vid användning av Tillbaka-knappen.
+- Start- och tillbaka-navigationen har justerats för stabilare beteende vid hopp mellan steg och sökträffar.
+
+### Technical
+
+- Versionsnummer uppdaterat från 1.9.0 till 1.10.0.
+
 ## [1.9.0] – 2026-06-05
 
 ### Added

@@ -253,3 +253,64 @@ img.guide {
     color: var(--gc-gray);
   }
 }
+
+/* ===== Sökfunktion ===== */
+
+.search-panel {
+  background: #ffffff;
+  padding: 16px;
+  margin: 0 auto 16px auto;
+  max-width: 720px;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.search-panel label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--gc-green-dark);
+}
+
+#searchInput {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid var(--gc-gray);
+  border-radius: var(--radius);
+  font-size: 16px;
+}
+
+#searchInput:focus {
+  outline: 3px solid var(--gc-green-dark);
+  outline-offset: 2px;
+}
+
+.search-results {
+  margin-top: 10px;
+}
+
+.search-results p {
+  color: var(--gc-text);
+  margin: 8px 0 0;
+}
+
+.search-result-button {
+  width: 100%;
+  display: block;
+  background: var(--gc-green-dark);
+  margin: 8px 0;
+  text-align: left;
+}
+
+#copyReport {
+  display: none;
+  background: var(--gc-green-dark);
+}
+
+.copy-status {
+  min-height: 1.2em;
+  color: var(--gc-green-dark);
+  font-weight: 600;
+  text-align: center;
+}

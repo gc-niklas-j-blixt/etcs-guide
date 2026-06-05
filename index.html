@@ -22,6 +22,17 @@
 
     <div id="breadcrumbs" class="breadcrumbs"></div>
 
+    <section class="search-panel" aria-label="Sök i ETCS-guiden">
+      <label for="searchInput">Sök i guiden</label>
+      <input
+        type="search"
+        id="searchInput"
+        placeholder="Sök t.ex. RBC, ATP, BTM, JRU, Tillsätt broms..."
+        autocomplete="off"
+      />
+      <div id="searchResults" class="search-results"></div>
+    </section>
+
     <main>
       <!-- Titel för varje steg -->
       <h2 id="title"></h2>
@@ -34,6 +45,9 @@
 
       <!-- Dynamiskt genererade valknappar -->
       <div id="choices"></div>
+
+      <button id="copyReport" type="button">Kopiera felrapport</button>
+      <div id="copyStatus" class="copy-status"></div>
 
       <!-- Gå tillbaka-knapp -->
       <button id="back">Tillbaka</button>
