@@ -2,6 +2,28 @@
 
 Alla noterade förändringar i projektet. Formatet följer SemVer (MAJOR.MINOR.PATCH).
 
+## [1.9.0] – 2026-06-05
+
+### Added
+
+- Utökat innehåll i felsökningsguiden med nya eller kompletterade steg i `guide.js`.
+- Fler vägval och/eller åtgärdssteg har lagts till för att ge bättre stöd vid felsökning i ETCS-flödena.
+
+### Changed
+
+- Förbättrade och förtydligade texter i berörda guide-noder.
+- Justerat befintliga val och instruktioner för tydligare vägledning.
+- Mindre strukturjusteringar i `guide.js` för att göra flödet mer komplett och konsekvent.
+
+### Fixed
+
+- Mindre korrigeringar i befintligt guideinnehåll.
+- Rättat eller kompletterat otydliga steg där användaren tidigare kunde få för lite vägledning.
+
+### Technical
+
+- Versionsnummer uppdaterat från 1.8.1 till 1.9.0.
+
 ## [1.8.1] – 2026-03-23
 
 ### Fixed

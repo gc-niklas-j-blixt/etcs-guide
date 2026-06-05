@@ -38,8 +38,32 @@ const guide = {
   run_brake_run: {
     title: "Ser du något av följande meddelanden på DMI?",
     choices: [
+      ["ETCS-fel","dmi_atp_failure"],
       ["Nödstopp från RBC", "eb_from_rbc"],
     ],
+  },
+
+  dmi_atp_failure: {
+    title: "ETCS-fel",
+    image: "assets/images/atp_failure.png",
+    text: "Om ett stoppande fel i tågskyddsystemet inträffar under färd kommer systemet att aktivera driftbromsen. Om felet kvarstår under längre tid än 5 sekunder efter att fordonet stannat, växlar tågskyddsystemet till driftläge 'Systemefel (SF) och aktiverar nödbromsen",
+    choices: [
+      ["Fordonet står still och 'ETCS-fel' syns inte längre", "atp_failure_resolved"],
+      ["Fordonet står still och nödbroms är aktiverad", "atp_failure"]
+    ],
+  },
+
+  atp_failure: {
+    title: "Driftläge 'Systemfel (SF)",
+    image: "assets/images/atp_failure_sf.png",
+    text: "Om systemet går in i driftläge 'Systemfel (SF), så kommer nödbromsen att aktiveras samt symbolen för 'Systemfel (SF)' kommer visas på DMI (Se bild ovan).\n\nBromsarna kan inte lossas förrän du har gjort en lyckad omstart eller förbikoppling av tågskyddsystemet.\n\nOm det inte går att starta om tågskyddsystemet framgångsrikt så ska du felanmäla fordonet enligt gällande rutin.",
+    choices: [],
+  },
+
+  atp_failure_resolved: {
+    title: "'ETCS-fel' syns inte längre på DMI",
+    text: "Om meddelandet 'ETCS-fel' försvinner och du inte har några andra felmeddelanden på DMI, så kan du fortsätta din tågfärd enligt gällande tekniska körbesked.",
+    choices:[],
   },
 
   eb_from_rbc:{
@@ -72,8 +96,9 @@ const guide = {
       ["Kommunikationsfel/Ingen radioförbindelse möjlig", "warn_no_rbc_connection"],
       ["ETCS-fel", "warn_etcs_fel"],
       ["Tillsätt broms!", "warn_apply_brake"],
-      ["ETCS – Traction cut‑off inte tillgänglig", "warn_traction_cutoff"]
-    ]
+      ["ETCS – Traction cut‑off inte tillgänglig", "warn_traction_cutoff"],
+      ["Juridical Recording inte tillgänglig,", "jru_not_recording"],
+    ],
   },
 
   // ---- RBC / Radio ----
@@ -99,7 +124,6 @@ const guide = {
 
   rbc_communication_error_eb: {
     title: "Driftläge 'Nödstopp – TR'",
-    image: "assets/images/no_rbc.png",
     text:
       "Tågskyddssystemet har gått in i driftläge 'Nödstopp – TR'.\n\n" +
       "1) Systemet försöker automatiskt återupprätta radioförbindelsen.\n" +
@@ -270,14 +294,56 @@ const guide = {
     title: "Ser du något på DMI?",
     text: "Titta efter menyer/symboler som visas på DMI.",
     choices: [
+      ["ETCS Förbikopplat", "dmi_atp_isolated"],
       ["Förarhytt inte aktiv", "cab_activation"],
       ["DMI visar menyn 'Föraridentitet'", "dmi_driver_id"],
+      ["BTM-test misslyckades", "btm_test_failed"],
       ["ETCS driftbroms inte tillgänglig", "dmi_sb_not_avail"],
       ["ETCS – Traction cut‑off inte tillgänglig", "warn_traction_cutoff"],
       ["Juridical Recording inte tillgängligt", "jru_not_recording"],
       ["Ingen kontakt med ATP", "atp_switch_on"],
       
-    ]
+    ],
+  },
+  dmi_atp_isolated: {
+    title: "ETCS förbikopplat",
+    image: "assets/images/dmi_atp_isolated.png",
+    text: "Om du ser ovanstående meddelande på DMI behöver du kontrollera att tågskyddsystemets isoleringsbrytare står i rätt läge.\n\nHar du kontrollerat att isoleringsrbrytaren står i rätt läge?",
+    choices: [
+      ["Ja, isoleringsbrytaren är i rätt läge", "atp_reboot"],
+      ["Nej, jag har inte kontrollerat isoleringsbrytaren", "atp_isolation_switch_check"],
+    ],
+  },
+
+  atp_isolation_switch_check: {
+    title: "Kontrollera isoleringsbrytaren",
+    text: "Kontrollera att isoleringsbrytaren står i läge 'Inkopplat'.",
+    choices: [
+      ["Isoleringsbrytaren är i rätt läge", "atp_reboot"],
+      ["Isoleringsrbytren var i fel läge, nu är den i rätt läge", "atp_reboot"],
+    ],
+  },
+
+  atp_reboot: {
+    title: "Isoleringbrytaren är i rätt läge",
+    text: "Prova att starta om tågskyddsystemet genom att:\n\n1)Vrida huvuströmställaren till läge FRÅN/OFF\n\n2)Vänta minst 10 sekunder\n\n3)Vrid huvudströmställaren till läge TILL/ON\n\n4)Gå tillbaka till hytten för att kontrollera om systmet startar.(OBS, det tar 120 sekunder för systemet att start upp helt).",
+    choices: [
+      ["Jag har startat om men det gör ingen skillnad", "atp_isolation_switch_on"],
+      ["Systemet ser ut att starta","dmi_display_check"],
+    ],
+  },
+
+  atp_isolation_switch_on: {
+    title: "ETCS Förbikopplat - (efter omstart)",
+    text: "Om meddelandet 'ETCS förbikopplat' inte försvinner efter att du har testat att starta om systemet, ska du felanmäla fordonet enligt gällande rutin",
+    choices:[],
+  },
+
+  btm_test_failed: {
+    title: "BTM-test misslyckades",
+    image: "assets/images/btm_test_failed.png",
+    text: "Fordonet får inte stå med balisantennen över en balis eller massivt metallobjekt (t.ex en järnbro) under uppstarstproceduren. När förarhytten är aktiverad utför tågskyddsystemet automatiskt testa av balistransmissionen. Om fordonet står olämpligt placerat kan detta fel uppstå.\nOm du ser meddelndet ovan på DMI måste du:\n\n1) Stänga av tågskyddsystemet/alternativ isolera det\n\n2) Flytta fordonet\n\n3) Starta upp/starta om systemet på nytt.\n\n\nStartproceduren kan inte avslutas innan transmissionstestet är slutfört.",
+    choices:[],
   },
 
   dmi_sb_not_avail: {
@@ -319,19 +385,20 @@ const guide = {
     text: "Tryck på 'JA' eller inom den gula rutan om alternativen 'JA/NEJ' inte visas.",
     choices: [
       ["ETCS-bromstest lyckades", "dmi_level"],
+      ["Bromstestet misslyckades, utöför nytt bromstest.", "check_sifa_valves"],
       ["ETCS-bromstest lyckades, men 'ETCS – traction cut off inte tillgänglig' visas", "warn_traction_cutoff"],
       ["Går inte att starta bromstest", "check_brake_handle"]
     ]
   },
 
- 
+
 
   check_brake_handle: {
     title: "Kontrollera huvudbromskontroll och HL",
     text: "Säkerställ 5 bar i HL och att huvudbromskontrollen ligger i läge 'Gångläge'.",
     choices: [
       ["Nu är huvudbromskontrollen i gångläge (5 bar i HL)", "dmi_brake_test"],
-      ["Huvudbromskontroll i gångläge (5 bar i HL) men bromstest startar inte", "check_sifa_valves"]
+      ["Huvudbromskontroll i gångläge (5 bar i HL) men bromstest startar inte", "dmi_brake_test_failure"]
     ]
   },
 
