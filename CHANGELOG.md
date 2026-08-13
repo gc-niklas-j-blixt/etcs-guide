@@ -2,6 +2,15 @@
 
 Alla noterade förändringar i projektet. Formatet följer SemVer (MAJOR.MINOR.PATCH).
 
+## [1.10.2] – 2026-08-13
+
+### Technical
+
+- Delat upp guideinnehållet från `js/guide.js` i mindre ämnesindelade filer under `data/`.
+- Anpassat validatorn för att kontrollera guideinnehåll över flera filer.
+- Förbättrat projektstrukturen för att göra guiden enklare att underhålla och vidareutveckla.
+- Ingen avsiktlig förändring av guidens användargränssnitt eller felsökningsflöden.
+
 ## [1.10.1] – 2026-08-13
 
 ### Fixed
