@@ -6,37 +6,83 @@ from pathlib import Path
 # Grundinställningar
 # =========================================================
 
-# Projektets rotmapp
+# Projektets rotmapp.
+# validate-guide.py ligger i /scripts, därför går vi upp en nivå.
 project_root = Path(__file__).resolve().parent.parent
 
-# Sökvägen till guide.js
-guide_path = project_root / "js" / "guide.js"
+# Nuvarande huvudfil med guideinnehåll
+main_guide_path = project_root / "js" / "guide.js"
+
+# Här kommer vi framöver lägga uppdelade delar av guiden
+data_dir = project_root / "data"
 
 
 # =========================================================
-# Läs guide.js
+# Hitta guidefiler
+# =========================================================
+
+guide_files = []
+
+# Lägg till nuvarande guide.js om den finns
+if main_guide_path.exists():
+    guide_files.append(main_guide_path)
+
+# Lägg till alla framtida .js-filer från data/
+if data_dir.exists():
+    guide_files.extend(sorted(data_dir.glob("*.js")))
+
+if not guide_files:
+    print("ETCS Första Hjälpen – guidekontroll")
+    print("-----------------------------------")
+    print("FEL: Inga guidefiler hittades.")
+    raise SystemExit(1)
+
+
+# =========================================================
+# Läs alla guidefiler
+# =========================================================
+
+guide_parts = []
+
+for guide_file in guide_files:
+    try:
+        text = guide_file.read_text(encoding="utf-8")
+        guide_parts.append(text)
+    except Exception as error:
+        print("ETCS Första Hjälpen – guidekontroll")
+        print("-----------------------------------")
+        print(f"FEL: Kunde inte läsa {guide_file}")
+        print(error)
+        raise SystemExit(1)
+
+# Slå ihop innehållet virtuellt för validatorns kontroller.
+# Originalfilerna ändras inte.
+guide_text = "\n".join(guide_parts)
+
+
+# =========================================================
+# Grundinformation
 # =========================================================
 
 print("ETCS Första Hjälpen – guidekontroll")
 print("-----------------------------------")
+print(f"Guidefiler hittade: {len(guide_files)}")
 
-if not guide_path.exists():
-    print(f"FEL: Hittar inte {guide_path}")
-    raise SystemExit(1)
+for guide_file in guide_files:
+    relative_path = guide_file.relative_to(project_root)
+    print(f"  - {relative_path}")
 
-guide_text = guide_path.read_text(encoding="utf-8")
-
-print(f"Guide hittad: {guide_path}")
-print(f"Filstorlek: {len(guide_text)} tecken")
-print("OK: guide.js kunde läsas.")
+print(f"Total storlek: {len(guide_text)} tecken")
+print("OK: Alla guidefiler kunde läsas.")
 
 
 # =========================================================
 # Hitta noder
 # =========================================================
 
-# Hittar noder som exempelvis:
+# Hittar exempelvis:
 #
+# start: {
 # dmi_brake_test: {
 # warn_traction_cutoff: {
 #
@@ -46,21 +92,51 @@ node_pattern = re.compile(
     re.MULTILINE
 )
 
-nodes = set(node_pattern.findall(guide_text))
+node_matches = node_pattern.findall(guide_text)
+
+# Set används vid jämförelser.
+nodes = set(node_matches)
+
+
+# =========================================================
+# Kontroll 0 – dubbla nod-ID
+# =========================================================
+
+duplicate_nodes = sorted(
+    {
+        node
+        for node in node_matches
+        if node_matches.count(node) > 1
+    }
+)
+
+print()
+print("Kontroll av nod-ID")
+print("------------------")
+
+if duplicate_nodes:
+    print(f"FEL: {len(duplicate_nodes)} nod-ID förekommer flera gånger:")
+
+    for node in duplicate_nodes:
+        print(f"  - {node}")
+else:
+    print("OK: Alla nod-ID är unika.")
 
 
 # =========================================================
 # Hitta länkar mellan noder
 # =========================================================
 
-# Hittar choices som exempelvis:
+# Hittar exempelvis:
 #
 # ["Fortsätt", "next_step"]
 # ["DMI visar menyn 'Föraridentitet'", "dmi_driver_id"]
 #
-# Klarar apostrofer inne i dubbelciterad text och tvärtom.
+# Klarar apostrofer inne i dubbelciterad knapptext
+# och dubbla citattecken inne i enkelciterad knapptext.
 choice_pattern = re.compile(
-    r'\[\s*(?:"[^"]*"|\'[^\']*\')\s*,\s*["\']([A-Za-z0-9_]+)["\']\s*\]'
+    r'\[\s*(?:"[^"]*"|\'[^\']*\')'
+    r'\s*,\s*["\']([A-Za-z0-9_]+)["\']\s*\]'
 )
 
 targets = choice_pattern.findall(guide_text)
@@ -74,7 +150,7 @@ print(f"Länkar mellan steg hittade: {len(targets)}")
 
 
 # =========================================================
-# Kontroll 1 – länkar som pekar på noder som saknas
+# Kontroll 1 – länkar till noder som saknas
 # =========================================================
 
 missing_targets = sorted(set(targets) - nodes)
@@ -84,7 +160,7 @@ print("Länkkontroll")
 print("------------")
 
 if missing_targets:
-    print(f"FEL: {len(missing_targets)} länkmål saknas i guide.js:")
+    print(f"FEL: {len(missing_targets)} länkmål saknas:")
 
     for target in missing_targets:
         print(f"  - {target}")
@@ -93,16 +169,17 @@ else:
 
 
 # =========================================================
-# Kontroll 2 – val som saknar länkmål
+# Kontroll 2 – tomma länkmål
 # =========================================================
 
 # Hittar exempelvis:
 #
 # ["Fortsätt", ""]
 #
-# vilket annars skulle skapa en knapp som inte leder någonstans.
+# vilket annars ger en knapp som inte leder någonstans.
 empty_target_pattern = re.compile(
-    r'\[\s*(?:"([^"]*)"|\'([^\']*)\')\s*,\s*["\']\s*["\']\s*\]'
+    r'\[\s*(?:"([^"]*)"|\'([^\']*)\')'
+    r'\s*,\s*["\']\s*["\']\s*\]'
 )
 
 empty_target_matches = empty_target_pattern.findall(guide_text)
@@ -128,7 +205,7 @@ else:
 
 
 # =========================================================
-# Kontroll 3 – bygg graf över guiden
+# Bygg graf över guiden
 # =========================================================
 
 graph = {node: [] for node in nodes}
@@ -137,7 +214,7 @@ current_node = None
 
 for line in guide_text.splitlines():
 
-    # Kontrollera om raden börjar en ny nod.
+    # Kontrollera om raden börjar en ny nod
     node_match = re.match(
         r"^\s*([A-Za-z0-9_]+)\s*:\s*{",
         line
@@ -146,9 +223,10 @@ for line in guide_text.splitlines():
     if node_match:
         current_node = node_match.group(1)
 
-    # Kontrollera om raden innehåller ett choice med länkmål.
+    # Kontrollera om raden innehåller ett choice med länkmål
     choice_match = re.search(
-        r'\[\s*(?:"[^"]*"|\'[^\']*\')\s*,\s*["\']([A-Za-z0-9_]+)["\']\s*\]',
+        r'\[\s*(?:"[^"]*"|\'[^\']*\')'
+        r'\s*,\s*["\']([A-Za-z0-9_]+)["\']\s*\]',
         line
     )
 
@@ -158,25 +236,30 @@ for line in guide_text.splitlines():
 
 
 # =========================================================
-# Kontroll 4 – noder som inte går att nå från start
+# Kontroll 3 – noder som inte går att nå från start
 # =========================================================
 
 reachable = set()
-stack = ["start"]
 
-while stack:
-    node = stack.pop()
+if "start" in nodes:
+    stack = ["start"]
 
-    if node in reachable:
-        continue
+    while stack:
+        node = stack.pop()
 
-    reachable.add(node)
+        if node in reachable:
+            continue
 
-    for target in graph.get(node, []):
-        if target not in reachable:
-            stack.append(target)
+        reachable.add(node)
 
-unreachable = sorted(nodes - reachable)
+        for target in graph.get(node, []):
+            if target not in reachable:
+                stack.append(target)
+
+    unreachable = sorted(nodes - reachable)
+
+else:
+    unreachable = sorted(nodes)
 
 
 print()
@@ -184,7 +267,7 @@ print("Kontroll av onåbara noder")
 print("-------------------------")
 
 if "start" not in nodes:
-    print("FEL: Startnoden 'start' saknas i guide.js.")
+    print("FEL: Startnoden 'start' saknas.")
 
 elif unreachable:
     print(
@@ -199,7 +282,7 @@ else:
 
 
 # =========================================================
-# Kontroll 5 – bilder som saknas
+# Kontroll 4 – bilder som saknas
 # =========================================================
 
 # Hittar exempelvis:
@@ -220,7 +303,7 @@ for image_path in image_paths:
     if not full_image_path.exists():
         missing_images.append(image_path)
 
-# Ta bort eventuella dubletter i fellistan
+# Ta bort eventuella dubletter
 missing_images = sorted(set(missing_images))
 
 
@@ -242,7 +325,8 @@ else:
 # =========================================================
 
 error_count = (
-    len(missing_targets)
+    len(duplicate_nodes)
+    + len(missing_targets)
     + len(empty_targets)
     + len(missing_images)
 )
@@ -250,18 +334,19 @@ error_count = (
 if "start" not in nodes:
     error_count += 1
 
-warning_count = len(unreachable)
+warning_count = len(unreachable) if "start" in nodes else 0
 
 
 print()
 print("===================================")
 print("SAMMANFATTNING")
 print("===================================")
-print(f"Noder:     {len(nodes)}")
-print(f"Länkar:    {len(targets)}")
-print(f"Bilder:    {len(image_paths)}")
-print(f"Fel:       {error_count}")
-print(f"Varningar: {warning_count}")
+print(f"Guidefiler: {len(guide_files)}")
+print(f"Noder:      {len(nodes)}")
+print(f"Länkar:     {len(targets)}")
+print(f"Bilder:     {len(image_paths)}")
+print(f"Fel:        {error_count}")
+print(f"Varningar:  {warning_count}")
 print()
 
 if error_count == 0 and warning_count == 0:
@@ -275,3 +360,15 @@ elif error_count == 0:
 else:
     print("RESULTAT: FEL")
     print("Guiden innehåller fel som bör åtgärdas.")
+
+
+# =========================================================
+# Exit-kod
+# =========================================================
+
+# Exit code 1 gör det möjligt att senare använda validatorn
+# automatiskt i exempelvis release-script eller GitHub Actions.
+if error_count > 0:
+    raise SystemExit(1)
+
+raise SystemExit(0)
