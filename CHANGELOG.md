@@ -2,6 +2,25 @@
 
 Alla noterade förändringar i projektet. Formatet följer SemVer (MAJOR.MINOR.PATCH).
 
+## [1.10.1] – 2026-08-13
+
+### Fixed
+
+- Rättat ett felaktigt länkmål i bromstestflödet (`dmi_break_test_failure` → `dmi_brake_test_failure`).
+- Rättat flödet efter utförd losstöt så att ett startat bromstest leder tillbaka till rätt bromsteststeg.
+- Tagit bort äldre oanvända guide-noder som inte längre gick att nå från startsidan.
+
+### Added
+
+- Ny automatisk validator för `guide.js`.
+- Validatorn kontrollerar trasiga länkar, tomma länkmål, onåbara noder och saknade bilder.
+- Ny lokal Python-baserad utvecklingsserver för enklare förhandsgranskning.
+- Ny `DEVELOPMENT.md` med instruktioner för utveckling och publicering.
+
+### Technical
+
+- Förbättrat projektets utvecklings- och kontrollflöde utan förändringar av det övergripande användargränssnittet.
+
 ## [1.10.0] – 2026-06-05
 
 ### Added

@@ -194,14 +194,6 @@ start: {
     choices: []
   },
 
-  warn_atp_no_connection: {
-    title: "Ingen kontakt med ATP",
-    text: "Om detta felmeddelande visas ska du säkerställa att tågskyddsystemet är påslaget korrekt. Du kan prova att starta om systmet genom att:\n\n1)Vrida huvudströmställaren till läge 'OFF'\n\n2)Vänta minst 10 sekunder.\n\n3)Slå på tågskyddsystemet genom att vrida huvudströmställaren till läge 'ON'.\n\n4)Observera att uppstarten av systemet tar 120 sekunder. Om systemet startar upp korrekt så ska DMI visa något utav följande:",
-    choices: [
-      ["Menyn 'Föraridentitet", "dmi_driver_id"],
-      ['Förarhytt inte aktiv',"cab_activation"],
-    ],
-  },
 
   dmi_driver_id: {
     title: "Mata in och bekräfta föraridentitet",
@@ -235,11 +227,7 @@ start: {
     ]
   },
    
-  driving_failure: {
-    title: "Felanmäl enligt gällande rutin",
-    text: "Detta steg avslutar guiden. Följ er ordinarie felanmälningsprocess.",
-    choices: []
-  },
+
 
   atp_switch_on: {
     title: "Kontrollera ETCS-huvudströmställare",
@@ -265,13 +253,7 @@ start: {
     choices:[],
   },
     
-  // Behåller noden om du vill länka till den senare
-  under_uppbyggnad: {
-    title: "Denna del av guiden är under uppbyggnad",
-    text: "Det här steget är inte färdigt ännu. Funktionen kommer att läggas in i kommande version.",
-    help: "Detta är en testversion av verktyget. Fler steg och funktioner läggs in löpande.",
-    choices: []
-  },
+
 
   // ======== DMI UPPSTART ========
 
@@ -416,8 +398,18 @@ start: {
     text: "Säkerställ 5 bar i HL och att huvudbromskontrollen ligger i läge 'Gångläge'.",
     choices: [
       ["Nu är huvudbromskontrollen i gångläge (5 bar i HL)", "dmi_brake_test"],
-      ["Huvudbromskontroll i gångläge (5 bar i HL) men bromstest startar inte", "dmi_brake_test_failure"]
+      ["Huvudbromskontroll i gångläge (5 bar i HL) men bromstest startar inte", "brake_release_push"]
     ]
+  },
+
+  brake_release_push: {
+    title: "Har du gjort en loss stöt?",
+    text: "Testa att göra en lossstöt manöver med huvudbromskontrollen.",
+    choices: [
+      ["Ja, men bromstestet startar ändå inte", "dmi_brake_test_failure"],
+      ["Bromstestet startade efter losstöt", "dmi_brake_test"]
+    ]
+  
   },
 
   check_sifa_valves: {
