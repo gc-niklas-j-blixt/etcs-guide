@@ -142,20 +142,7 @@ const guide = {
 
 
 
-  cab_activation: {
-    title: "Aktivera förarhytten",
-    text: "Aktivera hytten enligt rutin och invänta DMI-reaktion.",
-    choices: [
-      ["Hytten är aktiverad men DMI reagerar inte", "cab_activation_failure"],
-      ["Nu har jag aktiverat hytten", "dmi_display_check"]
-    ]
-  },
-
-  cab_activation_failure: {
-    title: "Felanmäl: Hyttaktivering fungerar inte",
-    text: "Felanmäl enligt gällande rutin.",
-    choices: []
-  },
+  
 
   
 
