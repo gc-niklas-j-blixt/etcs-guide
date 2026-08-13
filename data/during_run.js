@@ -1,0 +1,92 @@
+// ==========================
+// FEL UNDER KÖRNING
+// ==========================
+
+Object.assign(guide, {
+
+    problem_during_run: {
+        title: "Vad är det som händer under körning?",
+        text: "Välj det alternativ som bäst beskriver situationen.",
+        choices: [
+            ["En varning visas på DMI", "run_dmi_warning"],
+            ["Tåget bromsar oväntat", "run_brake_issue"]
+            // (Tillfälligt borttagna: Radio/RBC, ATC/NTC, Annat problem)
+        ]
+    },
+
+    run_brake_issue: {
+        title: "När sker den oväntade bromsningen?",
+        text: "Välj det alternativ som bäst matchar situationen.",
+        choices: [
+            ["Direkt när jag börjar köra", "run_brake_start"],
+            ["När jag kör som vanligt", "run_brake_run"],
+        ],
+    },
+      
+    run_brake_run: {
+        title: "Ser du något av följande meddelanden på DMI?",
+        choices: [
+            ["ETCS-fel", "dmi_atp_failure"],
+            ["Nödstopp från RBC", "eb_from_rbc"],
+        ],
+    },
+        
+    dmi_atp_failure: {
+        title: "ETCS-fel",
+        image: "assets/images/atp_failure.png",
+        text: "Om ett stoppande fel i tågskyddsystemet inträffar under färd kommer systemet att aktivera driftbromsen. Om felet kvarstår under längre tid än 5 sekunder efter att fordonet stannat, växlar tågskyddsystemet till driftläge 'Systemefel (SF) och aktiverar nödbromsen",
+        choices: [
+            ["Fordonet står still och 'ETCS-fel' syns inte längre", "atp_failure_resolved"],
+            ["Fordonet står still och nödbroms är aktiverad", "atp_failure"]
+        ],
+    },
+        
+    atp_failure: {
+        title: "Driftläge 'Systemfel (SF)",
+        image: "assets/images/atp_failure_sf.png",
+        text: "Om systemet går in i driftläge 'Systemfel (SF), så kommer nödbromsen att aktiveras samt symbolen för 'Systemfel (SF)' kommer visas på DMI (Se bild ovan).\n\nBromsarna kan inte lossas förrän du har gjort en lyckad omstart eller förbikoppling av tågskyddsystemet.\n\nOm det inte går att starta om tågskyddsystemet framgångsrikt så ska du felanmäla fordonet enligt gällande rutin.",
+        choices: [],
+    },
+
+    atp_failure_resolved: {
+        title: "'ETCS-fel' syns inte längre på DMI",
+        text: "Om meddelandet 'ETCS-fel' försvinner och du inte har några andra felmeddelanden på DMI, så kan du fortsätta din tågfärd enligt gällande tekniska körbesked.",
+        choices: [],
+    },
+
+    eb_from_rbc: {
+        title: "Nödstopp från RBC (Broms begärd)",
+        image: "assets/images/eb_from_RBC.png",
+        text: "Tågskyddsystemet har mottagit en ovilkorlig Nödbromsorder från RBC.\n1) Låt fordonet stanna.\n2) Följ operativa regler för nödstoppsmeddelanden från RBC",
+        choices: [],
+    },
+
+    run_brake_start: {
+        title: "Bromsning direkt när du börjar köra (”Rullningsvakt”)",
+        image: "assets/images/roll_away_protection.png",
+        text:
+            "ETCS kan begära broms (”Rullningsvakt”) direkt vid start om systemet inte är redo att ge körbesked.\n\n" +
+            "Vanliga orsaker:\n" +
+            "• Start of Mission inte slutförd (t.ex. ‘Start’-knappen ej tryckt i slutet av uppstartsproceduren)\n" +
+            "• Tågdata ej bekräftade\n" +
+            "• Bromstest ej avslutat\n" +
+            "• Radio/RBC inte ansluten\n" +
+            "• Systemet saknar korrekt position",
+        choices: []
+    },
+
+    // ======== DMI-VARNINGAR ========
+
+    run_dmi_warning: {
+        title: "Vilken typ av varning visas på DMI?",
+        text: "Välj det alternativ som bäst matchar det du ser på skärmen.",
+        choices: [
+            ["Kommunikationsfel/Ingen radioförbindelse möjlig", "warn_no_rbc_connection"],
+            ["ETCS-fel", "warn_etcs_fel"],
+            ["Tillsätt broms!", "warn_apply_brake"],
+            ["ETCS – Traction cut‑off inte tillgänglig", "warn_traction_cutoff"],
+            ["Juridical Recording inte tillgänglig,", "jru_not_recording"],
+        ],
+    },
+
+});
