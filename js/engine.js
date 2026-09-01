@@ -169,33 +169,88 @@ function renderSearchResults(query) {
     return;
   }
 
+    const normalizeSearchText = value =>
+    String(value || "")
+      .toLowerCase()
+      .replace(/[-\u2013\u2014_/]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+  const normalizedQuery = normalizeSearchText(query);
+
+  const queryWords = normalizedQuery
+    .split(" ")
+    .filter(Boolean);
+
   const matches = Object.entries(guide)
-    .filter(([id, node]) => {
+    .map(([id, node]) => {
       const choiceText = (node.choices || [])
         .map(choice => choice[0])
         .join(" ");
 
-     const keywordText = Array.isArray(node.keywords)
-  ? node.keywords.join(" ")
-  : "";
+      const keywordText = Array.isArray(node.keywords)
+        ? node.keywords.join(" ")
+        : "";
 
-const searchableText = `
-  ${id}
-  ${node.title || ""}
-  ${node.text || ""}
-  ${choiceText}
-  ${keywordText}
-`.toLowerCase();
-      
- const normalizedQuery = query.replace(/[-–—_/]+/g, " ");
+      const titleText = normalizeSearchText(node.title);
+      const keywordSearchText = normalizeSearchText(keywordText);
+      const idText = normalizeSearchText(id);
+      const bodyText = normalizeSearchText(
+        `${node.text || ""} ${choiceText}`
+      );
 
-const queryWords = normalizedQuery
-  .split(/\s+/)
-  .filter(Boolean);
+      const searchableText = `
+        ${titleText}
+        ${keywordSearchText}
+        ${idText}
+        ${bodyText}
+      `;
 
-return queryWords.every(word => searchableText.includes(word));
+      const matchesAllWords = queryWords.every(word =>
+        searchableText.includes(word)
+      );
+
+      if (!matchesAllWords) {
+        return null;
+      }
+
+      let score = 0;
+
+      if (titleText === normalizedQuery) {
+        score += 100;
+      } else if (titleText.includes(normalizedQuery)) {
+        score += 70;
+      }
+
+      if (keywordSearchText.includes(normalizedQuery)) {
+        score += 60;
+      }
+
+      if (idText.includes(normalizedQuery)) {
+        score += 40;
+      }
+
+      if (bodyText.includes(normalizedQuery)) {
+        score += 20;
+      }
+
+      queryWords.forEach(word => {
+        if (titleText.includes(word)) score += 8;
+        if (keywordSearchText.includes(word)) score += 6;
+        if (idText.includes(word)) score += 3;
+        if (bodyText.includes(word)) score += 1;
+      });
+
+      return {
+        id,
+        node,
+        score
+      };
     })
-    .slice(0, 8);
+    .filter(Boolean)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 8)
+    .map(({ id, node }) => [id, node]);
 
   if (matches.length === 0) {
     results.innerHTML = "<p>Inga träffar.</p>";
