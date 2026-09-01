@@ -187,7 +187,9 @@ const searchableText = `
   ${keywordText}
 `.toLowerCase();
       
-     const queryWords = query
+ const normalizedQuery = query.replace(/[-–—_/]+/g, " ");
+
+const queryWords = normalizedQuery
   .split(/\s+/)
   .filter(Boolean);
 
