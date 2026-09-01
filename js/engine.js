@@ -175,13 +175,18 @@ function renderSearchResults(query) {
         .map(choice => choice[0])
         .join(" ");
 
-      const searchableText = `
-        ${id}
-        ${node.title || ""}
-        ${node.text || ""}
-        ${choiceText}
-      `.toLowerCase();
+     const keywordText = Array.isArray(node.keywords)
+  ? node.keywords.join(" ")
+  : "";
 
+const searchableText = `
+  ${id}
+  ${node.title || ""}
+  ${node.text || ""}
+  ${choiceText}
+  ${keywordText}
+`.toLowerCase();
+      
       return searchableText.includes(query);
     })
     .slice(0, 8);
