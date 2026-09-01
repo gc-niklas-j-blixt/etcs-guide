@@ -3,15 +3,15 @@
 // ==========================
 
 Object.assign(guide, {
-    start: {
-        title: "Vilken typ av problem har du?",
-        text: "Välj det alternativ som bäst motsvarar situationen.",
-        choices: [
-            ["Uppstartsproblem", "dmi_boot_check"],
-            ["Problem under körning", "problem_during_run"],
-            ["Vanliga fel / snabbval", "common_faults"]
-        ]
-    },
+start: {
+    title: "Eller välj ett område",
+    text: "Om du inte vill söka kan du istället välja det område som bäst motsvarar situationen.",
+    choices: [
+        ["Uppstartsproblem", "dmi_boot_check"],
+        ["Problem under körning", "problem_during_run"],
+        ["Vanliga fel / snabbval", "common_faults"]
+    ]
+},
   
     common_faults: {
         title: "Vanliga fel / snabbval",

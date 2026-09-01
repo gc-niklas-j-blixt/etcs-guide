@@ -23,7 +23,14 @@ function show(step, addToHistory = true) {
     }
 
   // Spara aktuellt steg
-currentStep = step;
+  currentStep = step;
+  
+  // Visa sökfunktionen endast på startsidan
+const searchPanel = document.querySelector(".search-panel");
+
+if (searchPanel) {
+  searchPanel.style.display = step === "start" ? "" : "none";
+}
 
 // Lägg till steget i historiken
 if (addToHistory && history[history.length - 1] !== step) {
