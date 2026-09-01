@@ -187,7 +187,11 @@ const searchableText = `
   ${keywordText}
 `.toLowerCase();
       
-      return searchableText.includes(query);
+     const queryWords = query
+  .split(/\s+/)
+  .filter(Boolean);
+
+return queryWords.every(word => searchableText.includes(word));
     })
     .slice(0, 8);
 
