@@ -82,7 +82,13 @@ Object.assign(guide, {
   "balistest fel",
   "balisfel",
   "balistransmission",
-  "transmissionstest misslyckades"
+            "transmissionstest misslyckades",
+  "problem med balis",
+"problem med BTM",
+"BTM fel vid uppstart",
+"BTM problem vid uppstart",
+"balisproblem",
+"balis fel vid uppstart"
 ],
         image: "assets/images/btm_test_failed.png",
         text: "Fordonet får inte stå med balisantennen över en balis eller massivt metallobjekt (t.ex en järnbro) under uppstarstproceduren. När förarhytten är aktiverad utför tågskyddsystemet automatiskt testa av balistransmissionen. Om fordonet står olämpligt placerat kan detta fel uppstå.\nOm du ser meddelndet ovan på DMI måste du:\n\n1) Stänga av tågskyddsystemet/alternativ isolera det\n\n2) Flytta fordonet\n\n3) Starta upp/starta om systemet på nytt.\n\n\nStartproceduren kan inte avslutas innan transmissionstestet är slutfört.",
