@@ -16,6 +16,17 @@ Object.assign(guide, {
 
     run_brake_issue: {
         title: "När sker den oväntade bromsningen?",
+        keywords: [
+  "tåget bromsar",
+  "loket bromsar",
+  "bromsar oväntat",
+  "oväntad bromsning",
+  "ETCS bromsar",
+  "ETCS bromsar tåget",
+  "fordonet bromsar",
+  "bromsar av sig själv",
+  "tåget bromsar av sig själv"
+],
         text: "Välj det alternativ som bäst matchar situationen.",
         choices: [
             ["Direkt när jag börjar köra", "run_brake_start"],
@@ -25,6 +36,14 @@ Object.assign(guide, {
       
     run_brake_run: {
         title: "Ser du något av följande meddelanden på DMI?",
+        keywords: [
+  "bromsar under körning",
+  "bromsar när jag kör",
+  "bromsning under färd",
+  "oväntad bromsning under körning",
+  "ETCS bromsar under körning",
+  "loket bromsar under körning"
+],
         choices: [
             ["ETCS-fel", "dmi_atp_failure"],
             ["Nödstopp från RBC", "eb_from_rbc"],
