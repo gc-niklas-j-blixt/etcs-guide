@@ -2,6 +2,22 @@
 
 Alla noterade förändringar i projektet. Formatet följer SemVer (MAJOR.MINOR.PATCH).
 
+## [1.11.0] – 2026-09-01
+
+### Added
+
+- Ny sökfokuserad startsida där användaren kan beskriva felet eller skriva texten som visas på DMI.
+- Stöd för extra sökord och vardagliga formuleringar för vanliga ETCS-fel.
+- Ny felsökningsväg för när NTC visas på förarens DMI.
+- Manuell navigering via Uppstartsproblem och Problem under körning finns kvar som alternativ.
+
+### Improved
+
+- Sökresultat rangordnas efter relevans.
+- Sökningen hanterar ord i olika ordning samt variationer med bindestreck och skiljetecken.
+- Förbättrad sökbarhet för bland annat ATP/ETCS-uppstart, DMI, BTM/balis, bromstest, RBC/radio, NTC/ATC-2 och oväntad bromsning.
+- Sökrutan visas endast på startsidan för ett renare felsökningsflöde.
+
 ## [1.10.2] – 2026-08-13
 
 ### Technical

@@ -8,6 +8,17 @@ Object.assign(guide, {
 
     dmi_boot_check: {
         title: "Startar DMI?",
+        keywords: [
+  "DMI svart",
+  "svart DMI",
+  "DMI startar inte",
+  "DMI tänds inte",
+  "inget på DMI",
+  "ingen bild på DMI",
+  "DMI skärm svart",
+  "DMI död",
+  "display svart"
+],
         text: "Observera DMI-skärmen vid uppstart.",
         choices: [
             ["Ja", "dmi_display_check"],

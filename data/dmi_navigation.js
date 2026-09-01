@@ -8,6 +8,15 @@ Object.assign(guide, {
 
     dmi_driver_id: {
         title: "Mata in och bekräfta föraridentitet",
+        keywords: [
+  "föraridentitet",
+  "förar-ID",
+  "förar id",
+  "driver id",
+  "ange föraridentitet",
+  "DMI föraridentitet",
+  "förarinloggning"
+],
         image: "assets/images/Föraridentitet.png",
         text: "Bilden på din DMI ska se ut ungefär som bilden ovan.Fyll i uppgifter enligt instruktion på DMI och bekräfta.",
         choices: [
@@ -22,6 +31,7 @@ Object.assign(guide, {
             ["ETCS Förbikopplat", "dmi_atp_isolated"],
             ["Förarhytt inte aktiv", "cab_activation"],
             ["DMI visar menyn 'Föraridentitet'", "dmi_driver_id"],
+            ["NTC visas på DMI", "dmi_ntc_visible"],
             ["BTM-test misslyckades", "btm_test_failed"],
             ["ETCS driftbroms inte tillgänglig", "dmi_sb_not_avail"],
             ["ETCS – Traction cut‑off inte tillgänglig", "warn_traction_cutoff"],
