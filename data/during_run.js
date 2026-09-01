@@ -56,6 +56,16 @@ Object.assign(guide, {
 
     eb_from_rbc: {
         title: "Nödstopp från RBC (Broms begärd)",
+        keywords: [
+  "Nödstopp från RBC",
+  "RBC nödstopp",
+  "nödbroms från RBC",
+  "emergency brake RBC",
+  "emergency stop RBC",
+  "ovillkorlig nödbromsorder",
+  "RBC bromsar tåget",
+  "RBC bromsorder"
+],
         image: "assets/images/eb_from_RBC.png",
         text: "Tågskyddsystemet har mottagit en ovilkorlig Nödbromsorder från RBC.\n1) Låt fordonet stanna.\n2) Följ operativa regler för nödstoppsmeddelanden från RBC",
         choices: [],
@@ -63,6 +73,16 @@ Object.assign(guide, {
 
     run_brake_start: {
         title: "Bromsning direkt när du börjar köra (”Rullningsvakt”)",
+        keywords: [
+  "rullningsvakt",
+  "bromsar direkt vid start",
+  "bromsar när jag kör iväg",
+  "bromsar vid igångkörning",
+  "tåget bromsar när jag börjar köra",
+  "oväntad bromsning vid start",
+  "roll away protection",
+  "rollaway protection"
+],
         image: "assets/images/roll_away_protection.png",
         text:
             "ETCS kan begära broms (”Rullningsvakt”) direkt vid start om systemet inte är redo att ge körbesked.\n\n" +

@@ -6,6 +6,16 @@ Object.assign(guide, {
 
     dmi_atp_isolated: {
         title: "ETCS förbikopplat",
+        keywords: [
+  "ETCS förbikopplat",
+  "ATP förbikopplat",
+  "ETCS isolerat",
+  "ATP isolerat",
+  "isoleringsbrytare",
+  "isoleringsbrytaren",
+  "ETCS bypass",
+  "ATP bypass"
+],
         image: "assets/images/dmi_atp_isolated.png",
         text: "Om du ser ovanstående meddelande på DMI behöver du kontrollera att tågskyddsystemets isoleringsbrytare står i rätt läge.\n\nHar du kontrollerat att isoleringsrbrytaren står i rätt läge?",
         choices: [
