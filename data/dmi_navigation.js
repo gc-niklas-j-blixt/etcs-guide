@@ -8,6 +8,15 @@ Object.assign(guide, {
 
     dmi_driver_id: {
         title: "Mata in och bekräfta föraridentitet",
+        keywords: [
+  "föraridentitet",
+  "förar-ID",
+  "förar id",
+  "driver id",
+  "ange föraridentitet",
+  "DMI föraridentitet",
+  "förarinloggning"
+],
         image: "assets/images/Föraridentitet.png",
         text: "Bilden på din DMI ska se ut ungefär som bilden ovan.Fyll i uppgifter enligt instruktion på DMI och bekräfta.",
         choices: [

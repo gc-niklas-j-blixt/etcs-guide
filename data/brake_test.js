@@ -9,6 +9,15 @@ Object.assign(guide, {
     dmi_brake_test: {
         title: "Utför bromstest",
         image: "assets/images/Utför Bromstest.png",
+        keywords: [
+  "ETCS bromstest",
+  "bromstest",
+  "bromstest misslyckas",
+  "bromstest misslyckades",
+  "bromstest fungerar inte",
+  "problem med bromstest",
+  "fel på bromstest"
+],
         text: "Tryck på 'JA' eller inom den gula rutan om alternativen 'JA/NEJ' inte visas.",
         choices: [
             ["ETCS-bromstest lyckades", "dmi_level"],
@@ -22,6 +31,16 @@ Object.assign(guide, {
 
     check_brake_handle: {
         title: "Kontrollera huvudbromskontroll och HL",
+        keywords: [
+  "bromstest startar inte",
+  "går inte att starta bromstest",
+  "kan inte starta bromstest",
+  "bromstest går inte igång",
+  "bromstest kommer inte igång",
+  "bromstest startfel",
+  "huvudbromskontroll",
+  "5 bar HL"
+],
         text: "Säkerställ 5 bar i HL och att huvudbromskontrollen ligger i läge 'Gångläge'.",
         choices: [
             ["Nu är huvudbromskontrollen i gångläge (5 bar i HL)", "dmi_brake_test"],
