@@ -29,6 +29,14 @@ Object.assign(guide, {
 
     rbc_communication_error: {
         title: "Hur reagerar tåget?",
+        keywords: [
+  "kommunikationsfel",
+  "RBC kommunikationsfel",
+  "kommunikationsfel från RBC",
+  "RBC felmeddelande",
+  "kommunikationsfel broms",
+  "kommunikationsfel nödstopp"
+],
         text:
             "Beroende på hur marksystemet är konfigurerat kan tågskyddssystemet göra något av följande:",
         choices: [
@@ -62,6 +70,16 @@ Object.assign(guide, {
 
     rbc_no_radio_connection: {
         title: "Ingen radioförbindelse möjlig",
+        keywords: [
+  "ingen radioförbindelse möjlig",
+  "ingen radioförbindelse",
+  "radioförbindelse saknas",
+  "ingen GSM-R",
+  "GSM-R saknas",
+  "ingen radiokontakt",
+  "radio ansluter inte",
+  "RBC radio saknas"
+],
         image: "assets/images/no_rbc.png",
         text:
             "Systemet meddelar att radioförbindelse inte är möjlig.\n\n" +
