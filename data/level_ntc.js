@@ -8,6 +8,18 @@ Object.assign(guide, {
 
     level_ntc_dmi_main_menu: {
         title: "Huvudmeny visas(ATC-2)",
+        keywords: [
+  "starta i NTC",
+  "starta NTC",
+  "NTC startprocedur",
+  "startprocedur NTC",
+  "ATC-2 start",
+  "starta ATC-2",
+  "ATC-2 startprocedur",
+  "välja NTC",
+  "nivå NTC",
+  "nivå ATC-2"
+],
         image: "assets/images/Huvudmeny Tågdata.png",
         text: "Tryck på 'Tågdata'.",
         choices: [
